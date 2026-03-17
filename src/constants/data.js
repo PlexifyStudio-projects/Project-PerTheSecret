@@ -39,7 +39,7 @@ export const ABOUT_SLIDES = [
     titleAccent: 'Perfumería',
     text: 'En Perfumería The Secret, cada fragancia cuenta una historia. Nos especializamos en perfumes inspirados en las casas más prestigiosas del mundo, cuidando cada detalle desde la selección de la esencia hasta la presentación final.',
     stat: { number: '500+', label: 'Clientes Felices' },
-    image: '/images/product-2.jpg',
+    image: 'images/product-2.jpg',
     features: [
       { icon: 'star', text: 'Fragancias Premium' },
       { icon: 'gift', text: 'Cajas de Regalo' },
@@ -53,7 +53,7 @@ export const ABOUT_SLIDES = [
     titleAccent: 'Mejores Marcas',
     text: 'Cada uno de nuestros perfumes es cuidadosamente formulado para capturar la esencia de las fragancias más icónicas del mundo. Duración prolongada, proyección elegante y una experiencia sensorial única.',
     stat: { number: '100+', label: 'Fragancias' },
-    image: '/images/product-3.jpg',
+    image: 'images/product-3.jpg',
     features: [
       { icon: 'star', text: 'Alta Duración' },
       { icon: 'gift', text: 'Envases Elegantes' },
@@ -67,7 +67,7 @@ export const ABOUT_SLIDES = [
     titleAccent: 'Enamoran',
     text: 'Nuestras cajas de regalo son mucho más que un empaque. Son una experiencia completa que combina fragancias exquisitas con detalles artesanales que convierten cada obsequio en un momento inolvidable.',
     stat: { number: '5+', label: 'Años de Experiencia' },
-    image: '/images/product-1.jpg',
+    image: 'images/product-1.jpg',
     features: [
       { icon: 'star', text: 'Packaging Artesanal' },
       { icon: 'gift', text: 'Chocolates Incluidos' },
@@ -86,75 +86,75 @@ export const CATALOG_FILTERS = [
 
 export const CATALOG_ITEMS = [
   // ── MASCULINOS ──
-  { id: 1, name: 'Boss Bottled Intense', category: 'masculino', description: 'Intensidad sofisticada para el hombre moderno.', notes: 'Manzana · Canela · Sándalo', size: '100ml', price: 'Consultar', badge: 'Popular', image: '/images/p1.jpg' },
-  { id: 2, name: 'Noir Absolu', category: 'masculino', description: 'Misterioso y magnético. La esencia de la noche.', notes: 'Oud · Incienso · Vetiver', size: '100ml', price: 'Consultar', badge: 'Top Ventas', image: '/images/p2.jpg' },
-  { id: 3, name: 'Chrome Sport', category: 'masculino', description: 'Frescura y dinamismo para el día a día.', notes: 'Cítricos · Lavanda · Musgo', size: '100ml', price: 'Consultar', badge: null, image: '/images/p3.jpg' },
-  { id: 4, name: 'Fuego Interior', category: 'masculino', description: 'Notas cálidas y especiadas para noches especiales.', notes: 'Pimienta · Cuero · Cedro', size: '100ml', price: 'Consultar', badge: null, image: '/images/p4.jpg' },
-  { id: 5, name: 'Titanium Edge', category: 'masculino', description: 'Potencia metálica con frescura acuática.', notes: 'Bergamota · Pimienta · Ámbar', size: '100ml', price: 'Consultar', badge: 'Nuevo', image: '/images/p5.jpg' },
-  { id: 6, name: 'Royal Oud', category: 'masculino', description: 'La majestuosidad del oud en su máxima expresión.', notes: 'Oud · Rosa · Sándalo', size: '100ml', price: 'Consultar', badge: null, image: '/images/p6.jpg' },
-  { id: 7, name: 'Savage Elixir', category: 'masculino', description: 'Salvaje y adictivo. Imposible de ignorar.', notes: 'Pomelo · Pimienta · Ámbar gris', size: '60ml', price: 'Consultar', badge: null, image: '/images/p7.jpg' },
+  { id: 1, name: 'Boss Bottled Intense', category: 'masculino', description: 'Intensidad sofisticada para el hombre moderno.', notes: 'Manzana · Canela · Sándalo', size: '100ml', price: 'Consultar', badge: 'Popular', image: 'images/p1.jpg' },
+  { id: 2, name: 'Noir Absolu', category: 'masculino', description: 'Misterioso y magnético. La esencia de la noche.', notes: 'Oud · Incienso · Vetiver', size: '100ml', price: 'Consultar', badge: 'Top Ventas', image: 'images/p2.jpg' },
+  { id: 3, name: 'Chrome Sport', category: 'masculino', description: 'Frescura y dinamismo para el día a día.', notes: 'Cítricos · Lavanda · Musgo', size: '100ml', price: 'Consultar', badge: null, image: 'images/p3.jpg' },
+  { id: 4, name: 'Fuego Interior', category: 'masculino', description: 'Notas cálidas y especiadas para noches especiales.', notes: 'Pimienta · Cuero · Cedro', size: '100ml', price: 'Consultar', badge: null, image: 'images/p4.jpg' },
+  { id: 5, name: 'Titanium Edge', category: 'masculino', description: 'Potencia metálica con frescura acuática.', notes: 'Bergamota · Pimienta · Ámbar', size: '100ml', price: 'Consultar', badge: 'Nuevo', image: 'images/p5.jpg' },
+  { id: 6, name: 'Royal Oud', category: 'masculino', description: 'La majestuosidad del oud en su máxima expresión.', notes: 'Oud · Rosa · Sándalo', size: '100ml', price: 'Consultar', badge: null, image: 'images/p6.jpg' },
+  { id: 7, name: 'Savage Elixir', category: 'masculino', description: 'Salvaje y adictivo. Imposible de ignorar.', notes: 'Pomelo · Pimienta · Ámbar gris', size: '60ml', price: 'Consultar', badge: null, image: 'images/p7.jpg' },
 
   // ── FEMENINOS ──
-  { id: 8, name: 'Ámbar Dorado', category: 'femenino', description: 'Calidez envolvente con notas de ámbar y oro.', notes: 'Ámbar · Vainilla · Almizcle', size: '80ml', price: 'Consultar', badge: 'Exclusivo', image: '/images/p8.jpg' },
-  { id: 9, name: 'Fleur de Lune', category: 'femenino', description: 'Delicadeza floral para noches de luna llena.', notes: 'Peonía · Gardenia · Sándalo', size: '80ml', price: 'Consultar', badge: null, image: '/images/p9.jpg' },
-  { id: 10, name: 'Violet Dream', category: 'femenino', description: 'Un sueño de violetas y jazmín.', notes: 'Violeta · Iris · Almizcle', size: '75ml', price: 'Consultar', badge: null, image: '/images/p10.jpg' },
-  { id: 11, name: 'Eleganza Rosa', category: 'femenino', description: 'Sofisticación pura con pétalos de rosa.', notes: 'Rosa · Jazmín · Vainilla', size: '80ml', price: 'Consultar', badge: 'Nuevo', image: '/images/p11.jpg' },
-  { id: 12, name: 'Cherry Blossom', category: 'femenino', description: 'La dulzura del cerezo japonés en cada gota.', notes: 'Cereza · Peonía · Almizcle', size: '75ml', price: 'Consultar', badge: null, image: '/images/p12.jpg' },
-  { id: 13, name: 'Dolce Notte', category: 'femenino', description: 'Una noche dulce e irresistible.', notes: 'Caramelo · Coco · Madera', size: '80ml', price: 'Consultar', badge: null, image: '/images/p13.jpg' },
-  { id: 14, name: 'Crystal Aura', category: 'femenino', description: 'Transparencia cristalina con destellos florales.', notes: 'Lirio · Magnolia · Cedro', size: '100ml', price: 'Consultar', badge: 'Popular', image: '/images/p14.jpg' },
+  { id: 8, name: 'Ámbar Dorado', category: 'femenino', description: 'Calidez envolvente con notas de ámbar y oro.', notes: 'Ámbar · Vainilla · Almizcle', size: '80ml', price: 'Consultar', badge: 'Exclusivo', image: 'images/p8.jpg' },
+  { id: 9, name: 'Fleur de Lune', category: 'femenino', description: 'Delicadeza floral para noches de luna llena.', notes: 'Peonía · Gardenia · Sándalo', size: '80ml', price: 'Consultar', badge: null, image: 'images/p9.jpg' },
+  { id: 10, name: 'Violet Dream', category: 'femenino', description: 'Un sueño de violetas y jazmín.', notes: 'Violeta · Iris · Almizcle', size: '75ml', price: 'Consultar', badge: null, image: 'images/p10.jpg' },
+  { id: 11, name: 'Eleganza Rosa', category: 'femenino', description: 'Sofisticación pura con pétalos de rosa.', notes: 'Rosa · Jazmín · Vainilla', size: '80ml', price: 'Consultar', badge: 'Nuevo', image: 'images/p11.jpg' },
+  { id: 12, name: 'Cherry Blossom', category: 'femenino', description: 'La dulzura del cerezo japonés en cada gota.', notes: 'Cereza · Peonía · Almizcle', size: '75ml', price: 'Consultar', badge: null, image: 'images/p12.jpg' },
+  { id: 13, name: 'Dolce Notte', category: 'femenino', description: 'Una noche dulce e irresistible.', notes: 'Caramelo · Coco · Madera', size: '80ml', price: 'Consultar', badge: null, image: 'images/p13.jpg' },
+  { id: 14, name: 'Crystal Aura', category: 'femenino', description: 'Transparencia cristalina con destellos florales.', notes: 'Lirio · Magnolia · Cedro', size: '100ml', price: 'Consultar', badge: 'Popular', image: 'images/p14.jpg' },
 
   // ── UNISEX ──
-  { id: 15, name: 'Aqua Vitale', category: 'unisex', description: 'Frescura acuática para espíritus libres.', notes: 'Bergamota · Agua Marina · Cedro', size: '100ml', price: 'Consultar', badge: 'Unisex', image: '/images/p15.jpg' },
-  { id: 16, name: 'Zen Garden', category: 'unisex', description: 'Serenidad oriental en cada aplicación.', notes: 'Té Verde · Bambú · Almizcle', size: '100ml', price: 'Consultar', badge: null, image: '/images/p16.jpg' },
-  { id: 17, name: 'Madera Sagrada', category: 'unisex', description: 'La espiritualidad del palo santo y la mirra.', notes: 'Palo Santo · Mirra · Ámbar', size: '100ml', price: 'Consultar', badge: null, image: '/images/p17.jpg' },
-  { id: 18, name: 'Café Noir', category: 'unisex', description: 'La intensidad del café con toques ahumados.', notes: 'Café · Tabaco · Vainilla', size: '80ml', price: 'Consultar', badge: 'Nuevo', image: '/images/p18.jpg' },
-  { id: 19, name: 'Santal Rouge', category: 'unisex', description: 'Sándalo rojo con especias orientales.', notes: 'Sándalo · Canela · Cardamomo', size: '100ml', price: 'Consultar', badge: null, image: '/images/p19.jpg' },
-  { id: 20, name: 'Brisa Marina', category: 'unisex', description: 'El frescor del océano en su estado más puro.', notes: 'Sal Marina · Limón · Madera', size: '100ml', price: 'Consultar', badge: null, image: '/images/p20.jpg' },
+  { id: 15, name: 'Aqua Vitale', category: 'unisex', description: 'Frescura acuática para espíritus libres.', notes: 'Bergamota · Agua Marina · Cedro', size: '100ml', price: 'Consultar', badge: 'Unisex', image: 'images/p15.jpg' },
+  { id: 16, name: 'Zen Garden', category: 'unisex', description: 'Serenidad oriental en cada aplicación.', notes: 'Té Verde · Bambú · Almizcle', size: '100ml', price: 'Consultar', badge: null, image: 'images/p16.jpg' },
+  { id: 17, name: 'Madera Sagrada', category: 'unisex', description: 'La espiritualidad del palo santo y la mirra.', notes: 'Palo Santo · Mirra · Ámbar', size: '100ml', price: 'Consultar', badge: null, image: 'images/p17.jpg' },
+  { id: 18, name: 'Café Noir', category: 'unisex', description: 'La intensidad del café con toques ahumados.', notes: 'Café · Tabaco · Vainilla', size: '80ml', price: 'Consultar', badge: 'Nuevo', image: 'images/p18.jpg' },
+  { id: 19, name: 'Santal Rouge', category: 'unisex', description: 'Sándalo rojo con especias orientales.', notes: 'Sándalo · Canela · Cardamomo', size: '100ml', price: 'Consultar', badge: null, image: 'images/p19.jpg' },
+  { id: 20, name: 'Brisa Marina', category: 'unisex', description: 'El frescor del océano en su estado más puro.', notes: 'Sal Marina · Limón · Madera', size: '100ml', price: 'Consultar', badge: null, image: 'images/p20.jpg' },
 ];
 
 // ── ENVASES (Bottles) — from client PDF catalog ──
 export const ENVASES_ITEMS = [
   // Page 2 — Invictus & Creed
-  { id: 'e1', name: 'Invictus', sizes: ['30ml', '60ml', '115ml'], image: '/images/envases/envase-p2-5.png' },
-  { id: 'e2', name: 'Creed', sizes: ['35ml', '55ml', '100ml'], image: '/images/envases/envase-p2-9.png' },
+  { id: 'e1', name: 'Invictus', sizes: ['30ml', '60ml', '115ml'], image: 'images/envases/envase-p2-5.png' },
+  { id: 'e2', name: 'Creed', sizes: ['35ml', '55ml', '100ml'], image: 'images/envases/envase-p2-9.png' },
   // Page 3 — Polo, Fahrenheit, Issey, Boss, Valentino
-  { id: 'e3', name: 'Polo Black', sizes: ['100ml'], image: '/images/envases/envase-p3-2.png' },
-  { id: 'e4', name: 'Fahrenheit', sizes: ['100ml'], image: '/images/envases/envase-p3-3.png' },
-  { id: 'e5', name: 'Issey Miyake', sizes: ['120ml'], image: '/images/envases/envase-p3-4.png' },
-  { id: 'e6', name: 'Boss', sizes: ['60ml'], image: '/images/envases/envase-p3-5.png' },
-  { id: 'e7', name: 'Boss Negro', sizes: ['120ml'], image: '/images/envases/envase-p3-6.png' },
-  { id: 'e8', name: 'Boss Blanco', sizes: ['120ml'], image: '/images/envases/envase-p3-7.png' },
-  { id: 'e9', name: 'Boss Bottled', sizes: ['120ml'], image: '/images/envases/envase-p3-8.png' },
-  { id: 'e10', name: 'Valentino', sizes: ['30ml', '55ml'], badge: 'Opalizado', image: '/images/envases/envase-p3-10.png' },
+  { id: 'e3', name: 'Polo Black', sizes: ['100ml'], image: 'images/envases/envase-p3-2.png' },
+  { id: 'e4', name: 'Fahrenheit', sizes: ['100ml'], image: 'images/envases/envase-p3-3.png' },
+  { id: 'e5', name: 'Issey Miyake', sizes: ['120ml'], image: 'images/envases/envase-p3-4.png' },
+  { id: 'e6', name: 'Boss', sizes: ['60ml'], image: 'images/envases/envase-p3-5.png' },
+  { id: 'e7', name: 'Boss Negro', sizes: ['120ml'], image: 'images/envases/envase-p3-6.png' },
+  { id: 'e8', name: 'Boss Blanco', sizes: ['120ml'], image: 'images/envases/envase-p3-7.png' },
+  { id: 'e9', name: 'Boss Bottled', sizes: ['120ml'], image: 'images/envases/envase-p3-8.png' },
+  { id: 'e10', name: 'Valentino', sizes: ['30ml', '55ml'], badge: 'Opalizado', image: 'images/envases/envase-p3-10.png' },
   // Page 4 — Valentino, 212 Men, Bad Boy, Polo, Puño, Legend
-  { id: 'e11', name: 'Valentino Original', sizes: ['105ml'], image: '/images/envases/envase-p4-2.png' },
-  { id: 'e12', name: 'Valentino Negro', sizes: ['105ml'], image: '/images/envases/envase-p4-3.png' },
-  { id: 'e13', name: '212 Men', sizes: ['100ml'], badge: 'Tipo Original', image: '/images/envases/envase-p4-4.png' },
-  { id: 'e14', name: 'Bad Boy', sizes: ['100ml'], image: '/images/envases/envase-p4-5.png' },
-  { id: 'e15', name: 'Polo Red', sizes: ['100ml'], image: '/images/envases/envase-p4-6.png' },
-  { id: 'e16', name: 'Polo Blue', sizes: ['130ml'], soldOut: true, image: '/images/envases/envase-p4-7.png' },
-  { id: 'e17', name: 'Puño', sizes: ['60ml', '80ml'], soldOut: true, image: '/images/envases/envase-p4-9.png' },
-  { id: 'e18', name: 'Legend', sizes: ['100ml'], image: '/images/envases/envase-p4-10.png' },
+  { id: 'e11', name: 'Valentino Original', sizes: ['105ml'], image: 'images/envases/envase-p4-2.png' },
+  { id: 'e12', name: 'Valentino Negro', sizes: ['105ml'], image: 'images/envases/envase-p4-3.png' },
+  { id: 'e13', name: '212 Men', sizes: ['100ml'], badge: 'Tipo Original', image: 'images/envases/envase-p4-4.png' },
+  { id: 'e14', name: 'Bad Boy', sizes: ['100ml'], image: 'images/envases/envase-p4-5.png' },
+  { id: 'e15', name: 'Polo Red', sizes: ['100ml'], image: 'images/envases/envase-p4-6.png' },
+  { id: 'e16', name: 'Polo Blue', sizes: ['130ml'], soldOut: true, image: 'images/envases/envase-p4-7.png' },
+  { id: 'e17', name: 'Puño', sizes: ['60ml', '80ml'], soldOut: true, image: 'images/envases/envase-p4-9.png' },
+  { id: 'e18', name: 'Legend', sizes: ['100ml'], image: 'images/envases/envase-p4-10.png' },
   // Page 5 — Lacoste
-  { id: 'e19', name: 'Lacoste Red', sizes: ['100ml'], image: '/images/envases/envase-p5-2.png' },
-  { id: 'e20', name: 'Lacoste Rojo', sizes: ['100ml'], image: '/images/envases/envase-p5-4.png' },
-  { id: 'e21', name: 'Lacoste Negro', sizes: ['100ml'], image: '/images/envases/envase-p5-5.png' },
-  { id: 'e22', name: 'Lacoste Blanca', sizes: ['100ml'], image: '/images/envases/envase-p5-9.png' },
-  { id: 'e23', name: 'Lacoste Magnetic', sizes: ['100ml'], image: '/images/envases/envase-p5-10.png' },
+  { id: 'e19', name: 'Lacoste Red', sizes: ['100ml'], image: 'images/envases/envase-p5-2.png' },
+  { id: 'e20', name: 'Lacoste Rojo', sizes: ['100ml'], image: 'images/envases/envase-p5-4.png' },
+  { id: 'e21', name: 'Lacoste Negro', sizes: ['100ml'], image: 'images/envases/envase-p5-5.png' },
+  { id: 'e22', name: 'Lacoste Blanca', sizes: ['100ml'], image: 'images/envases/envase-p5-9.png' },
+  { id: 'e23', name: 'Lacoste Magnetic', sizes: ['100ml'], image: 'images/envases/envase-p5-10.png' },
   // Page 6 — Dior, Chanel, Swiss Army, 212 VIP, Jean Paul, Granada, Phantom
-  { id: 'e24', name: 'Dior Sauvage', sizes: ['50ml', '100ml'], image: '/images/envases/envase-p6-2.png' },
-  { id: 'e25', name: 'Bleu de Chanel', sizes: ['55ml', '115ml'], image: '/images/envases/envase-p6-4.png' },
-  { id: 'e26', name: 'Swiss Army', sizes: ['105ml'], image: '/images/envases/envase-p6-5.png' },
-  { id: 'e27', name: '212 VIP', sizes: ['150ml'], image: '/images/envases/envase-p6-7.png' },
-  { id: 'e28', name: 'Jean Paul', sizes: ['60ml'], image: '/images/envases/envase-p6-8.png' },
-  { id: 'e29', name: 'Granada', sizes: ['110ml'], image: '/images/envases/envase-p6-9.png' },
-  { id: 'e30', name: 'Phantom', sizes: ['100ml'], badge: 'Tipo Original', image: '/images/envases/envase-p6-10.png' },
+  { id: 'e24', name: 'Dior Sauvage', sizes: ['50ml', '100ml'], image: 'images/envases/envase-p6-2.png' },
+  { id: 'e25', name: 'Bleu de Chanel', sizes: ['55ml', '115ml'], image: 'images/envases/envase-p6-4.png' },
+  { id: 'e26', name: 'Swiss Army', sizes: ['105ml'], image: 'images/envases/envase-p6-5.png' },
+  { id: 'e27', name: '212 VIP', sizes: ['150ml'], image: 'images/envases/envase-p6-7.png' },
+  { id: 'e28', name: 'Jean Paul', sizes: ['60ml'], image: 'images/envases/envase-p6-8.png' },
+  { id: 'e29', name: 'Granada', sizes: ['110ml'], image: 'images/envases/envase-p6-9.png' },
+  { id: 'e30', name: 'Phantom', sizes: ['100ml'], badge: 'Tipo Original', image: 'images/envases/envase-p6-10.png' },
   // Page 7 — Santal 33, Osito Moschino
-  { id: 'e31', name: 'Santal 33', sizes: ['35ml', '60ml', '150ml'], image: '/images/envases/envase-p7-6.png' },
-  { id: 'e32', name: 'Osito Moschino', sizes: ['35ml', '55ml'], image: '/images/envases/envase-p7-10.png' },
+  { id: 'e31', name: 'Santal 33', sizes: ['35ml', '60ml', '150ml'], image: 'images/envases/envase-p7-6.png' },
+  { id: 'e32', name: 'Osito Moschino', sizes: ['35ml', '55ml'], image: 'images/envases/envase-p7-10.png' },
   // Page 8 — Moon, Yara
-  { id: 'e33', name: 'Moon', sizes: ['30ml', '60ml'], image: '/images/envases/envase-p8-3.png' },
-  { id: 'e34', name: 'Yara', sizes: ['30ml', '50ml', '100ml'], image: '/images/envases/envase-p8-5.png' },
+  { id: 'e33', name: 'Moon', sizes: ['30ml', '60ml'], image: 'images/envases/envase-p8-3.png' },
+  { id: 'e34', name: 'Yara', sizes: ['30ml', '50ml', '100ml'], image: 'images/envases/envase-p8-5.png' },
 ];
 
 export const GIFT_BOXES = [
@@ -164,7 +164,7 @@ export const GIFT_BOXES = [
     description:
       'Perfecta para sorprender a esa persona especial con una presentación premium llena de detalles.',
     includes: ['Perfume', 'Caja Decorada', 'Lazo Premium', 'Ferrero Rocher'],
-    image: '/images/gift-1.jpg',
+    image: 'images/gift-1.jpg',
   },
   {
     id: 2,
@@ -172,7 +172,7 @@ export const GIFT_BOXES = [
     description:
       'Un detalle que ilumina cualquier momento. Presentación delicada en tonos dorados y rosa.',
     includes: ['Perfume', 'Caja Temática', 'Moño Artesanal', 'Chocolate'],
-    image: '/images/gift-2.jpg',
+    image: 'images/gift-2.jpg',
   },
   {
     id: 3,
@@ -180,7 +180,7 @@ export const GIFT_BOXES = [
     description:
       'Ideal para él. Elegancia masculina que dice "Ábrelo, te encantará".',
     includes: ['Perfume', 'Caja Premium', 'Lazo Azul', 'Ferrero Rocher'],
-    image: '/images/gift-3.jpg',
+    image: 'images/gift-3.jpg',
   },
 ];
 
@@ -191,7 +191,7 @@ export const TESTIMONIALS = [
     author: 'María Gómez',
     role: 'Cliente desde 2024',
     stars: 5,
-    image: '/images/gift-1.jpg',
+    image: 'images/gift-1.jpg',
   },
   {
     id: 2,
@@ -199,7 +199,7 @@ export const TESTIMONIALS = [
     author: 'Carlos Ramírez',
     role: 'Cliente frecuente',
     stars: 5,
-    image: '/images/product-2.jpg',
+    image: 'images/product-2.jpg',
   },
   {
     id: 3,
@@ -207,7 +207,7 @@ export const TESTIMONIALS = [
     author: 'Ana Pérez',
     role: 'Cliente desde 2025',
     stars: 5,
-    image: '/images/product-1.jpg',
+    image: 'images/product-1.jpg',
   },
   {
     id: 4,
@@ -215,7 +215,7 @@ export const TESTIMONIALS = [
     author: 'Valentina Herrera',
     role: 'Cliente frecuente',
     stars: 5,
-    image: '/images/p2.jpg',
+    image: 'images/p2.jpg',
   },
   {
     id: 5,
@@ -223,7 +223,7 @@ export const TESTIMONIALS = [
     author: 'Andrés Castillo',
     role: 'Primera compra',
     stars: 5,
-    image: '/images/product-3.jpg',
+    image: 'images/product-3.jpg',
   },
   {
     id: 6,
@@ -231,7 +231,7 @@ export const TESTIMONIALS = [
     author: 'Santiago Mejía',
     role: 'Cliente desde 2024',
     stars: 5,
-    image: '/images/gift-2.jpg',
+    image: 'images/gift-2.jpg',
   },
   {
     id: 7,
@@ -239,7 +239,7 @@ export const TESTIMONIALS = [
     author: 'Laura Ríos',
     role: 'Cliente frecuente',
     stars: 5,
-    image: '/images/p8.jpg',
+    image: 'images/p8.jpg',
   },
   {
     id: 8,
@@ -247,7 +247,7 @@ export const TESTIMONIALS = [
     author: 'Julián Vargas',
     role: 'Primera compra',
     stars: 5,
-    image: '/images/gift-3.jpg',
+    image: 'images/gift-3.jpg',
   },
   {
     id: 9,
@@ -255,7 +255,7 @@ export const TESTIMONIALS = [
     author: 'Camila Duarte',
     role: 'Cliente desde 2025',
     stars: 5,
-    image: '/images/p7.jpg',
+    image: 'images/p7.jpg',
   },
   {
     id: 10,
@@ -263,7 +263,7 @@ export const TESTIMONIALS = [
     author: 'Diego Parra',
     role: 'Cliente frecuente',
     stars: 5,
-    image: '/images/product-4.jpg',
+    image: 'images/product-4.jpg',
   },
   {
     id: 11,
@@ -271,7 +271,7 @@ export const TESTIMONIALS = [
     author: 'Isabella Moreno',
     role: 'Cliente desde 2024',
     stars: 5,
-    image: '/images/product-5.jpg',
+    image: 'images/product-5.jpg',
   },
   {
     id: 12,
@@ -279,7 +279,7 @@ export const TESTIMONIALS = [
     author: 'Natalia Quintero',
     role: 'Primera compra',
     stars: 5,
-    image: '/images/p12.jpg',
+    image: 'images/p12.jpg',
   },
   {
     id: 13,
@@ -287,7 +287,7 @@ export const TESTIMONIALS = [
     author: 'Felipe Torres',
     role: 'Cliente desde 2025',
     stars: 5,
-    image: '/images/p6.jpg',
+    image: 'images/p6.jpg',
   },
   {
     id: 14,
@@ -295,7 +295,7 @@ export const TESTIMONIALS = [
     author: 'Daniela Ospina',
     role: 'Cliente frecuente',
     stars: 5,
-    image: '/images/product-6.jpg',
+    image: 'images/product-6.jpg',
   },
   {
     id: 15,
@@ -303,7 +303,7 @@ export const TESTIMONIALS = [
     author: 'Sebastián Restrepo',
     role: 'Cliente desde 2024',
     stars: 5,
-    image: '/images/p18.jpg',
+    image: 'images/p18.jpg',
   },
 ];
 

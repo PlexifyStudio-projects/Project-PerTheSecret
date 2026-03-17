@@ -152,6 +152,11 @@ const NavLink = ({ link, onClick, onHoverStart, index }) => {
 const MobileMenu = ({ isOpen, links, waUrl, onClose }) => {
   const playSound = useSound();
 
+  const handleClose = () => {
+    playSound('click');
+    onClose();
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -223,6 +228,22 @@ const MobileMenu = ({ isOpen, links, waUrl, onClose }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
+          {/* Close button (X) */}
+          <motion.button
+            className="navbar-mobile__close"
+            onClick={handleClose}
+            aria-label="Cerrar menú"
+            initial={{ opacity: 0, rotate: -90 }}
+            animate={{ opacity: 1, rotate: 0 }}
+            exit={{ opacity: 0, rotate: 90 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+            </svg>
+          </motion.button>
+
           {/* Animated background lines */}
           <div className="navbar-mobile__bg-lines" aria-hidden="true">
             {[...Array(5)].map((_, i) => (
