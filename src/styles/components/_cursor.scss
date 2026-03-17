@@ -1,0 +1,27 @@
+@use '../abstracts/variables' as *;
+
+// Subtle golden glow that follows the cursor with delay
+// The actual mouse cursor stays normal (default arrow)
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  margin-left: -100px;
+  margin-top: -100px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba($color-gold, 0.04) 0%,
+    rgba($color-gold, 0.015) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: $z-cursor;
+  will-change: transform;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+}

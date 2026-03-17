@@ -1,0 +1,716 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+//  ENVASES — Floating Gallery Theater
+//  Bottles float in dark void with dramatic lighting.
+//  Transparent PNGs = no cards, pure floating bottles.
+// ============================================================
+
+.envases {
+  padding-block: clamp($sp-8, 7vw, $sp-11);
+  position: relative;
+  overflow: hidden;
+  background: #0b0b0f;
+
+  // Noise texture
+  &__noise {
+    position: absolute;
+    inset: 0;
+    background-image: $gradient-noise;
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // ── Ambient glow pools ──
+  &__bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+
+    &--left {
+      width: 1000px;
+      height: 800px;
+      top: 10%;
+      left: -20%;
+      background: radial-gradient(ellipse at center, rgba($color-gold, 0.05) 0%, transparent 70%);
+    }
+
+    &--right {
+      width: 900px;
+      height: 700px;
+      bottom: 5%;
+      right: -15%;
+      background: radial-gradient(ellipse at center, rgba($color-gold, 0.035) 0%, transparent 70%);
+    }
+  }
+
+  &__container {
+    @include container($max-width-lg);
+    position: relative;
+    z-index: $z-base;
+  }
+
+  .section-header {
+    margin-bottom: $sp-4;
+  }
+
+  // ============================================================
+  //  FLOATING GOLD PARTICLES
+  // ============================================================
+  &__particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  &__particle {
+    position: absolute;
+    width: var(--p-size);
+    height: var(--p-size);
+    left: var(--p-left);
+    bottom: -10px;
+    border-radius: 50%;
+    background: $color-gold;
+    opacity: 0;
+    animation: particle-float var(--p-duration) var(--p-delay) ease-in-out infinite;
+  }
+
+  @keyframes particle-float {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: var(--p-opacity);
+    }
+    90% {
+      opacity: var(--p-opacity);
+    }
+    100% {
+      transform: translateY(-100vh) translateX(#{40px * 1 - 20px});
+      opacity: 0;
+    }
+  }
+
+  // ============================================================
+  //  COUNTER
+  // ============================================================
+  &__counter {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: $sp-2;
+    margin-bottom: clamp($sp-5, 3vw, $sp-7);
+  }
+
+  &__counter-num {
+    font-family: $font-display;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: $fw-bold;
+    @include gold-text;
+    line-height: 1;
+  }
+
+  &__counter-label {
+    @include label;
+    font-size: $fs-nano;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  // ============================================================
+  //  HORIZONTAL MARQUEE — The Floating Display Case
+  // ============================================================
+  &__marquee {
+    position: relative;
+    z-index: $z-base;
+    margin-bottom: clamp($sp-7, 4vw, $sp-9);
+  }
+
+  &__marquee-track {
+    display: flex;
+    justify-content: center;
+    gap: clamp($sp-6, 4vw, $sp-10);
+    padding: $sp-6 clamp($sp-5, 5vw, $sp-9);
+  }
+
+  // ── Navigation arrows ──
+  &__marquee-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    border-radius: $r-full;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.7);
+    @include flex-center;
+    cursor: pointer;
+    transition: all $dur-fast $ease-out-cubic;
+
+    &:hover {
+      border-color: rgba($color-gold, 0.4);
+      background: rgba($color-gold, 0.1);
+      color: $color-gold;
+      box-shadow: 0 0 20px rgba($color-gold, 0.08);
+    }
+
+    &--left {
+      left: clamp($sp-2, 2vw, $sp-5);
+    }
+
+    &--right {
+      right: clamp($sp-2, 2vw, $sp-5);
+    }
+
+    @include below($bp-sm) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  // ── Edge fade masks ──
+  &__marquee-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(40px, 6vw, 100px);
+    pointer-events: none;
+    z-index: 2;
+
+    &--left {
+      left: 0;
+      background: linear-gradient(to right, #0b0b0f, transparent);
+    }
+
+    &--right {
+      right: 0;
+      background: linear-gradient(to left, #0b0b0f, transparent);
+    }
+  }
+
+  // ============================================================
+  //  MARQUEE ITEM — Each floating bottle
+  // ============================================================
+  &__marquee-item {
+    flex: 0 0 auto;
+    width: clamp(160px, 18vw, 220px);
+    scroll-snap-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: $sp-4;
+
+    // Organic Y offset — different per bottle
+    transform: translateY(var(--float-y, 0));
+    transition: transform 0.5s $ease-out-expo;
+
+    @include below($bp-sm) {
+      width: 145px;
+    }
+
+    // ── Hover state ──
+    &--hovered {
+      .envases__marquee-bottle img {
+        transform: translateY(-12px) scale(1.06);
+        filter:
+          drop-shadow(0 25px 45px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 30px rgba($color-gold, 0.25))
+          drop-shadow(0 5px 15px rgba($color-gold, 0.15));
+      }
+
+      .envases__marquee-name {
+        color: $color-white;
+      }
+
+      .envases__marquee-size {
+        border-color: rgba($color-gold, 0.4);
+        color: $color-gold;
+        background: rgba($color-gold, 0.1);
+      }
+
+      .envases__marquee-badge {
+        background: rgba($color-gold, 0.2);
+        border-color: rgba($color-gold, 0.5);
+      }
+    }
+
+    // ── Sold out ──
+    &--sold-out {
+      .envases__marquee-bottle img {
+        filter:
+          grayscale(0.7) brightness(0.4)
+          drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6))
+          drop-shadow(0 0 20px rgba(180, 40, 40, 0.15));
+      }
+
+      &.envases__marquee-item--hovered .envases__marquee-bottle img {
+        filter:
+          grayscale(0.5) brightness(0.5)
+          drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 25px rgba(180, 40, 40, 0.2));
+      }
+    }
+  }
+
+  // ── Marquee badge ──
+  &__marquee-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    @include label;
+    font-size: 0.5625rem;
+    padding: 3px $sp-3;
+    background: rgba($color-gold, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba($color-gold, 0.25);
+    border-radius: 100px;
+    color: $color-gold-light;
+    transition: all 0.4s $ease-out-cubic;
+  }
+
+  // ── Marquee bottle — the precious specimen ──
+  &__marquee-bottle {
+    @include flex-center;
+    height: clamp(170px, 20vw, 230px);
+    padding: $sp-4;
+    position: relative;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6))
+        drop-shadow(0 0 15px rgba($color-gold, 0.08));
+      transition: transform 0.6s $ease-out-expo, filter 0.6s $ease-out-expo;
+
+      // Gentle floating bob animation
+      animation: bottle-bob var(--float-dur, 5s) var(--float-delay, 0s) ease-in-out infinite;
+    }
+  }
+
+  @keyframes bottle-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  // ── Marquee sold out overlay ──
+  &__marquee-sold {
+    position: absolute;
+    top: $sp-4;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    z-index: 4;
+    @include flex-center;
+
+    span {
+      font-family: $font-display;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: $fw-bold;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: $ls-wider;
+      text-transform: uppercase;
+      padding: $sp-2 $sp-5;
+      border: 1.5px solid rgba(180, 40, 40, 0.35);
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transform: rotate(-12deg);
+      text-shadow: 0 2px 10px rgba(180, 40, 40, 0.3);
+    }
+  }
+
+  // ── Marquee info ──
+  &__marquee-info {
+    text-align: center;
+    padding-top: $sp-3;
+    width: 100%;
+  }
+
+  &__marquee-name {
+    font-family: $font-display;
+    font-size: $fs-h4;
+    font-weight: $fw-medium;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: $ls-wide;
+    margin-bottom: $sp-2;
+    transition: color 0.4s $ease-out-cubic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include below($bp-sm) {
+      font-size: $fs-body-lg;
+    }
+  }
+
+  &__marquee-sizes {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  &__marquee-size {
+    font-family: $font-body;
+    font-size: 0.6875rem;
+    font-weight: $fw-medium;
+    letter-spacing: $ls-wide;
+    color: rgba($color-gold, 0.65);
+    padding: 3px $sp-3;
+    border: 1px solid rgba($color-gold, 0.2);
+    border-radius: 100px;
+    background: rgba($color-gold, 0.04);
+    transition: all 0.4s $ease-out-cubic;
+
+    @include below($bp-sm) {
+      font-size: 0.625rem;
+      padding: 2px $sp-2;
+    }
+  }
+
+  // ============================================================
+  //  EXPAND BUTTON
+  // ============================================================
+  &__expand {
+    @include flex-center;
+    margin-top: $sp-4;
+    margin-bottom: clamp($sp-6, 3vw, $sp-8);
+  }
+
+  &__expand-btn {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    padding: $sp-4 $sp-8;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 100px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s $ease-out-expo;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba($color-gold, 0.1), transparent);
+      transition: left 0.6s $ease-out-expo;
+    }
+
+    &:hover {
+      border-color: rgba($color-gold, 0.35);
+      background: rgba($color-gold, 0.06);
+      box-shadow: 0 4px 30px rgba($color-gold, 0.08);
+      transform: translateY(-2px);
+
+      &::before { left: 100%; }
+
+      .envases__expand-icon {
+        transform: translateY(2px);
+        color: $color-gold;
+      }
+    }
+  }
+
+  &__expand-text {
+    @include label;
+    font-size: $fs-nano;
+    color: rgba($color-gold, 0.85);
+  }
+
+  &__expand-icon {
+    display: flex;
+    color: rgba($color-gold, 0.5);
+    transition: transform 0.3s $ease-out-cubic, color 0.3s $ease-out-cubic;
+  }
+
+  // ============================================================
+  //  SHELF GRID — Museum display with gold shelf lines
+  // ============================================================
+  &__shelf {
+    overflow: hidden;
+  }
+
+  &__shelf-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp($sp-4, 2vw, $sp-6) clamp($sp-4, 2.5vw, $sp-6);
+
+    @include below($bp-lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include below($bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include below($bp-sm) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $sp-4 $sp-3;
+    }
+  }
+
+  // ============================================================
+  //  SHELF ITEM — Bottle floating above gold line
+  // ============================================================
+  &__shelf-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: $sp-3;
+    transition: transform 0.5s $ease-out-expo;
+
+    // Alternating shelf heights for visual rhythm
+    &:nth-child(4n+2) { margin-top: $sp-5; }
+    &:nth-child(4n+4) { margin-top: $sp-3; }
+
+    // ── Hover ──
+    &--hovered {
+      .envases__shelf-bottle > img {
+        transform: translateY(-12px) scale(1.04) perspective(800px) rotateY(3deg);
+        filter:
+          drop-shadow(0 25px 45px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 30px rgba($color-gold, 0.2))
+          drop-shadow(0 5px 15px rgba($color-gold, 0.12));
+      }
+
+      .envases__shelf-reflection {
+        opacity: 0.35;
+      }
+
+      .envases__shelf-name {
+        color: $color-white;
+      }
+
+      .envases__shelf-size {
+        border-color: rgba($color-gold, 0.4);
+        color: $color-gold;
+        background: rgba($color-gold, 0.1);
+      }
+
+      .envases__shelf-line {
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba($color-gold, 0.6) 20%,
+          rgba($color-gold-light, 0.8) 50%,
+          rgba($color-gold, 0.6) 80%,
+          transparent 100%
+        );
+        box-shadow: 0 0 12px rgba($color-gold, 0.15);
+      }
+
+      .envases__shelf-badge {
+        background: rgba($color-gold, 0.2);
+        border-color: rgba($color-gold, 0.5);
+      }
+    }
+
+    // ── Sold out ──
+    &--sold-out {
+      .envases__shelf-bottle > img {
+        filter:
+          grayscale(0.7) brightness(0.4)
+          drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6))
+          drop-shadow(0 0 20px rgba(180, 40, 40, 0.12));
+      }
+
+      &.envases__shelf-item--hovered .envases__shelf-bottle > img {
+        filter:
+          grayscale(0.5) brightness(0.5)
+          drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7))
+          drop-shadow(0 0 25px rgba(180, 40, 40, 0.18));
+      }
+
+      .envases__shelf-line {
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(180, 40, 40, 0.2) 30%,
+          rgba(180, 40, 40, 0.3) 50%,
+          rgba(180, 40, 40, 0.2) 70%,
+          transparent 100%
+        );
+      }
+    }
+  }
+
+  // ── Shelf badge ──
+  &__shelf-badge {
+    position: absolute;
+    top: $sp-2;
+    right: $sp-2;
+    z-index: 3;
+    @include label;
+    font-size: 0.5625rem;
+    padding: 3px $sp-3;
+    background: rgba($color-gold, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba($color-gold, 0.25);
+    border-radius: 100px;
+    color: $color-gold-light;
+    transition: all 0.4s $ease-out-cubic;
+  }
+
+  // ── Shelf bottle container ──
+  &__shelf-bottle {
+    @include flex-center;
+    height: clamp(150px, 18vw, 200px);
+    padding: $sp-4;
+    position: relative;
+
+    @include below($bp-sm) {
+      height: 140px;
+      padding: $sp-3;
+    }
+
+    > img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 12px 30px rgba(0, 0, 0, 0.55))
+        drop-shadow(0 0 12px rgba($color-gold, 0.06));
+      transition: transform 0.6s $ease-out-expo, filter 0.6s $ease-out-expo;
+    }
+  }
+
+  // ── CSS Reflection (mirrored bottle below) ──
+  &__shelf-reflection {
+    position: absolute;
+    bottom: -40%;
+    left: 0;
+    right: 0;
+    height: 60%;
+    @include flex-center;
+    opacity: 0;
+    transition: opacity 0.6s $ease-out-expo;
+    pointer-events: none;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transform: scaleY(-1);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 60%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 60%);
+      filter: blur(1px) brightness(0.5);
+    }
+  }
+
+  // ── Gold shelf line — museum display ledge ──
+  &__shelf-line {
+    width: 100%;
+    height: 1px;
+    margin-top: $sp-2;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-gold, 0.25) 20%,
+      rgba($color-gold, 0.4) 50%,
+      rgba($color-gold, 0.25) 80%,
+      transparent 100%
+    );
+    transition: background 0.5s $ease-out-expo, box-shadow 0.5s $ease-out-expo;
+  }
+
+  // ── Shelf sold out overlay ──
+  &__shelf-sold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    z-index: 4;
+    @include flex-center;
+
+    span {
+      font-family: $font-display;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: $fw-bold;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: $ls-wider;
+      text-transform: uppercase;
+      padding: $sp-2 $sp-5;
+      border: 1.5px solid rgba(180, 40, 40, 0.35);
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transform: rotate(-12deg);
+      text-shadow: 0 2px 10px rgba(180, 40, 40, 0.3);
+    }
+  }
+
+  // ── Shelf info ──
+  &__shelf-info {
+    text-align: center;
+    padding-top: $sp-3;
+    width: 100%;
+  }
+
+  &__shelf-name {
+    font-family: $font-display;
+    font-size: $fs-h4;
+    font-weight: $fw-medium;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: $ls-wide;
+    margin-bottom: $sp-2;
+    transition: color 0.4s $ease-out-cubic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include below($bp-sm) {
+      font-size: $fs-body-lg;
+    }
+  }
+
+  &__shelf-sizes {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  &__shelf-size {
+    font-family: $font-body;
+    font-size: 0.6875rem;
+    font-weight: $fw-medium;
+    letter-spacing: $ls-wide;
+    color: rgba($color-gold, 0.65);
+    padding: 3px $sp-3;
+    border: 1px solid rgba($color-gold, 0.2);
+    border-radius: 100px;
+    background: rgba($color-gold, 0.04);
+    transition: all 0.4s $ease-out-cubic;
+
+    @include below($bp-sm) {
+      font-size: 0.625rem;
+      padding: 2px $sp-2;
+    }
+  }
+}

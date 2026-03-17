@@ -1,0 +1,401 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// GIFT BOXES — Premium Glass Carousel with Gold Accents
+// ============================================================
+
+.gifts {
+  @include section-spacing;
+  position: relative;
+  background: $color-black-rich;
+  overflow: hidden;
+  @include noise-overlay;
+
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+
+  // ── Animated radial gradient following mouse ──
+  &__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      700px circle at var(--mouse-x) var(--mouse-y),
+      rgba($color-gold, 0.05) 0%,
+      transparent 55%
+    );
+    pointer-events: none;
+    z-index: 0;
+    transition: background 0.4s ease;
+  }
+
+  &__glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: $r-full;
+    background: radial-gradient(circle, rgba($color-gold, 0.03) 0%, transparent 70%);
+    top: 20%;
+    left: -150px;
+    pointer-events: none;
+    z-index: 0;
+
+    &--right {
+      left: auto;
+      right: -150px;
+      top: 60%;
+    }
+  }
+
+  &__container {
+    @include container($max-width-lg);
+    position: relative;
+    z-index: $z-base;
+  }
+
+  // ── 3-column grid ──
+  &__carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp($sp-4, 2.5vw, $sp-6);
+
+    @include below($bp-lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include below($bp-md) {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin-inline: auto;
+      gap: $sp-6;
+    }
+  }
+
+  // ── Individual card — Premium Glass ──
+  &__card {
+    position: relative;
+    @include flex-col;
+    overflow: hidden;
+    border-radius: $r-md;
+
+    background: linear-gradient(
+      165deg,
+      rgba(24, 22, 18, 0.95) 0%,
+      rgba(16, 14, 10, 0.98) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    transition: border-color $dur-slow $ease-out-cubic,
+                box-shadow $dur-slow $ease-out-cubic,
+                transform $dur-slow $ease-out-cubic;
+
+    &:hover,
+    &--active {
+      border-color: rgba($color-gold, 0.2);
+      box-shadow:
+        0 4px 30px rgba($color-gold, 0.08),
+        0 0 80px rgba($color-gold, 0.04),
+        inset 0 1px 0 rgba($color-gold, 0.08);
+      transform: translateY(-4px);
+    }
+
+    &:hover {
+      .gifts__shimmer::before {
+        animation: gifts-shimmer-sweep 1s ease forwards;
+      }
+
+      .gifts__corner svg path {
+        opacity: 0.8;
+        transition: opacity 0.5s ease;
+      }
+
+      .gifts__card-line {
+        opacity: 1;
+      }
+    }
+  }
+
+  // ── Corner frame decorations ──
+  &__corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 4;
+    pointer-events: none;
+    transition: opacity $dur-base ease;
+
+    svg path {
+      opacity: 0.2;
+      transition: opacity $dur-slow ease;
+    }
+
+    &--top-left {
+      top: $sp-3;
+      left: $sp-3;
+    }
+
+    &--top-right {
+      top: $sp-3;
+      right: $sp-3;
+      transform: rotate(90deg);
+    }
+
+    &--bottom-left {
+      bottom: $sp-3;
+      left: $sp-3;
+      transform: rotate(-90deg);
+    }
+
+    &--bottom-right {
+      bottom: $sp-3;
+      right: $sp-3;
+      transform: rotate(180deg);
+    }
+  }
+
+  // ── Golden shimmer sweep ──
+  &__shimmer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 20%,
+        rgba($color-gold, 0.04) 35%,
+        rgba($color-gold-light, 0.1) 50%,
+        rgba($color-gold, 0.04) 65%,
+        transparent 80%
+      );
+      transform: skewX(-15deg);
+    }
+  }
+
+  // ── Card image area ──
+  &__card-image {
+    position: relative;
+    @include aspect(4, 3);
+    overflow: hidden;
+
+    img {
+      @include cover-image;
+      transition: transform 1.4s $ease-out-expo;
+    }
+
+    // Subtle vignette
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+    }
+  }
+
+  &__card-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba($color-black-rich, 0.4) 70%,
+      rgba($color-black-rich, 0.95) 100%
+    );
+    pointer-events: none;
+  }
+
+  // ── Floating badge ──
+  &__card-badge {
+    position: absolute;
+    top: $sp-4;
+    right: $sp-4;
+    display: flex;
+    align-items: center;
+    gap: $sp-2;
+    padding: $sp-1 $sp-3;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba($color-gold, 0.2);
+    color: $color-gold;
+    font-family: $font-body;
+    font-size: $fs-nano;
+    font-weight: $fw-medium;
+    letter-spacing: $ls-wider;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  // ── Card body ──
+  &__card-body {
+    flex: 1;
+    padding: $sp-5 $sp-6 $sp-7;
+    @include flex-col;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    margin-bottom: $sp-3;
+    justify-content: center;
+  }
+
+  &__diamond {
+    display: inline-flex;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  &__card-name {
+    font-family: $font-display;
+    font-size: $fs-h4;
+    font-weight: $fw-medium;
+    color: $color-white;
+    letter-spacing: $ls-wide;
+    text-align: center;
+  }
+
+  &__card-desc {
+    font-size: $fs-small;
+    color: $color-text-muted;
+    line-height: $lh-normal;
+    margin-bottom: $sp-5;
+    text-align: center;
+  }
+
+  // ── Premium includes list ──
+  &__card-includes {
+    margin-top: auto;
+  }
+
+  &__card-includes-label {
+    display: block;
+    font-family: $font-body;
+    font-size: $fs-nano;
+    font-weight: $fw-medium;
+    letter-spacing: $ls-widest;
+    text-transform: uppercase;
+    color: $color-gold;
+    margin-bottom: $sp-3;
+    opacity: 0.7;
+  }
+
+  &__card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $sp-2;
+  }
+
+  &__card-list-item {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    font-family: $font-body;
+    font-size: $fs-small;
+    color: $color-text-soft;
+    letter-spacing: 0.02em;
+  }
+
+  &__card-list-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba($color-gold, 0.25);
+    color: $color-gold;
+    flex-shrink: 0;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  // ── Gold separator line ──
+  &__card-line {
+    width: 100%;
+    height: 1px;
+    background: $gradient-gold;
+    margin-top: $sp-5;
+    transform-origin: left;
+    opacity: 0.3;
+  }
+
+  // ── Progress dots ──
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: $sp-4;
+    margin-top: $sp-8;
+  }
+
+  &__dot {
+    width: 36px;
+    height: 2px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: rgba($color-white, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: background $dur-base, width $dur-base;
+
+    &:hover {
+      background: rgba($color-white, 0.16);
+    }
+
+    &--active {
+      width: 48px;
+      background: transparent;
+
+      .gifts__dot-fill {
+        animation: dot-fill-gold 0.6s $ease-out-expo forwards;
+      }
+    }
+  }
+
+  &__dot-fill {
+    position: absolute;
+    inset: 0;
+    background: $gradient-gold;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+}
+
+// ── Keyframes ──
+@keyframes gifts-shimmer-sweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(320%) skewX(-15deg);
+  }
+}
+
+@keyframes dot-fill-gold {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}

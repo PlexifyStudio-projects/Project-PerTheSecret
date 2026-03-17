@@ -1,0 +1,468 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ════════════════════════════════════════════════════════════════════
+// NAVBAR — Luxury Fashion-House Level
+// ════════════════════════════════════════════════════════════════════
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-nav;
+  padding: $sp-6 0;
+  transition: all $dur-slow $ease-out-expo;
+
+  // ── Frosted glass with gold tint on scroll ──────────────────────
+  &--scrolled {
+    padding: $sp-3 0;
+    background: rgba(6, 6, 6, 0.82);
+    backdrop-filter: blur(24px) saturate(1.4) brightness(1.02);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4) brightness(1.02);
+    border-bottom: 1px solid rgba($color-gold, 0.06);
+    box-shadow: 0 1px 40px rgba($color-gold, 0.03), 0 1px 0 rgba($color-gold, 0.04);
+
+    // Subtle gold tint overlay
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba($color-gold, 0.015) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+  }
+
+  // ── Golden magnetic trail (contained within menu area) ──────────
+  &__trail {
+    position: absolute;
+    bottom: -1px;
+    width: 80px;
+    height: 1px;
+    margin-left: -40px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-gold, 0.4) 30%,
+      $color-gold 50%,
+      rgba($color-gold, 0.4) 70%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+
+    @include below($bp-lg) { display: none; }
+  }
+
+  // ── Bottom accent line — only spans from logo to last nav item ──
+  &__accent-line {
+    position: absolute;
+    bottom: 0;
+    left: clamp($sp-5, 5vw, $sp-9);
+    right: clamp($sp-5, 5vw, $sp-9);
+    height: 1px;
+    background: $gradient-gold;
+    transform-origin: left;
+    opacity: 0.2;
+  }
+
+  // ── Container ───────────────────────────────────────────────────
+  &__container {
+    @include container($max-width-lg);
+    @include flex-between;
+    position: relative;
+  }
+
+  // ── Logo ────────────────────────────────────────────────────────
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    text-decoration: none;
+    position: relative;
+    z-index: $z-nav + 2;
+
+    &:hover .navbar__monogram {
+      filter: drop-shadow(0 0 8px rgba($color-gold, 0.3));
+    }
+
+    &:hover .navbar__logo-accent {
+      letter-spacing: 0.12em;
+    }
+  }
+
+  &__monogram {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    transition: filter $dur-base $ease-out-expo;
+
+    @include below($bp-md) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  &__logo-prefix {
+    font-family: $font-body;
+    font-size: $fs-nano;
+    font-weight: $fw-medium;
+    letter-spacing: $ls-wider;
+    text-transform: uppercase;
+    color: $color-text-soft;
+    transition: color $dur-base;
+  }
+
+  &__logo-accent {
+    font-family: $font-display;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    font-weight: $fw-bold;
+    letter-spacing: $ls-wide;
+    @include gold-text;
+    transition: letter-spacing $dur-slow $ease-out-expo;
+  }
+
+  // ── Desktop menu ────────────────────────────────────────────────
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: $sp-7;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include below($bp-lg) {
+      display: none;
+    }
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  // ── Nav links with animated icon on hover ───────────────────────
+  &__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: $sp-2;
+    text-decoration: none;
+    padding: $sp-2 0;
+
+    &-icon {
+      width: 14px;
+      height: 14px;
+      color: $color-gold;
+      flex-shrink: 0;
+      display: flex;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &-text {
+      display: block;
+      font-family: $font-body;
+      font-size: $fs-nano;
+      font-weight: $fw-medium;
+      letter-spacing: $ls-widest;
+      text-transform: uppercase;
+      color: $color-text-soft;
+      white-space: nowrap;
+      transition: color $dur-base $ease-out-expo;
+    }
+
+    // Hidden duplicate — not used
+    &-reveal {
+      display: none;
+    }
+
+    // Gold underline from left on hover
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: $color-gold;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform $dur-base $ease-out-expo;
+    }
+
+    &:hover {
+      .navbar__link-text {
+        color: $color-gold;
+      }
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  // ── WhatsApp CTA with pulsing gold glow ─────────────────────────
+  &__cta {
+    list-style: none;
+  }
+
+  &__wa-wrapper {
+    position: relative;
+    display: inline-flex;
+  }
+
+  &__wa-glow {
+    position: absolute;
+    inset: -3px;
+    border-radius: $r-md;
+    background: rgba($color-gold, 0.15);
+    filter: blur(10px);
+    animation: navbar-wa-pulse 2.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  &__wa-btn {
+    position: relative;
+    z-index: 1;
+  }
+
+  // ── Hamburger toggle ────────────────────────────────────────────
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: $sp-2;
+    z-index: $z-modal + 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+
+    @include below($bp-lg) {
+      display: flex;
+    }
+
+    span {
+      display: block;
+      width: 28px;
+      height: 1.5px;
+      background: $color-white;
+      transition: all $dur-base $ease-out-expo;
+      transform-origin: center;
+    }
+
+    &--open {
+      span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+        background: $color-gold;
+      }
+      span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+        background: $color-gold;
+      }
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════
+// MOBILE MENU — Full-screen overlay
+// ════════════════════════════════════════════════════════════════════
+.navbar-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: $z-overlay;
+  background: $color-black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  // ── Decorative vertical lines ───────────────────────────────────
+  &__bg-lines {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-evenly;
+    pointer-events: none;
+  }
+
+  &__bg-line {
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba($color-gold, 0.04) 30%,
+      rgba($color-gold, 0.06) 50%,
+      rgba($color-gold, 0.04) 70%,
+      transparent 100%
+    );
+    transform-origin: top;
+  }
+
+  // ── Navigation ──────────────────────────────────────────────────
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $sp-5;
+    padding: $sp-9;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__label {
+    @include label;
+    font-size: $fs-nano;
+    color: $color-gold;
+    margin-bottom: $sp-4;
+    display: block;
+    opacity: 0.6;
+  }
+
+  &__link {
+    display: flex;
+    align-items: baseline;
+    gap: $sp-4;
+    text-decoration: none;
+    color: $color-white;
+    font-family: $font-display;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-weight: $fw-bold;
+    line-height: 1.2;
+    letter-spacing: $ls-tight;
+    position: relative;
+    perspective: 600px;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-gold-light;
+    }
+  }
+
+  &__index {
+    font-family: $font-body;
+    font-size: $fs-nano;
+    font-weight: $fw-regular;
+    letter-spacing: $ls-wide;
+    color: rgba($color-gold, 0.35);
+    flex-shrink: 0;
+    min-width: 1.5rem;
+  }
+
+  &__split {
+    display: inline-flex;
+    overflow: hidden;
+  }
+
+  &__letter {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  // ── Mobile WhatsApp CTA ─────────────────────────────────────────
+  &__cta {
+    margin-top: $sp-8;
+    width: 100%;
+  }
+
+  &__wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: $sp-3;
+    padding: $sp-4 $sp-7;
+    background: transparent;
+    border: 1px solid rgba($color-gold, 0.3);
+    color: $color-gold;
+    font-family: $font-body;
+    font-size: $fs-small;
+    font-weight: $fw-medium;
+    letter-spacing: $ls-wider;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all $dur-base $ease-out-expo;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba($color-gold, 0.08);
+      border-color: rgba($color-gold, 0.6);
+      box-shadow: 0 0 30px rgba($color-gold, 0.12);
+    }
+  }
+
+  &__wa-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba($color-gold, 0.15);
+    animation: mobile-wa-pulse 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  // ── Footer info ─────────────────────────────────────────────────
+  &__footer {
+    position: absolute;
+    bottom: $sp-7;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 $sp-9;
+    font-family: $font-body;
+    font-size: $fs-nano;
+    letter-spacing: $ls-wider;
+    text-transform: uppercase;
+    color: rgba($color-white, 0.2);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════
+// KEYFRAMES
+// ════════════════════════════════════════════════════════════════════
+
+@keyframes navbar-wa-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes mobile-wa-pulse {
+  0%, 100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}

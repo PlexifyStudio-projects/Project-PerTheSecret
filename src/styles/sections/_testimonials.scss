@@ -1,0 +1,431 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// TESTIMONIALS — Premium Sliding Carousel with Product Images
+// ============================================================
+
+.testi {
+  @include section-spacing;
+  position: relative;
+  background: $color-dark;
+  @include noise-overlay;
+  overflow: hidden;
+
+  // ── Background glows ──
+  &__bg-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: $r-full;
+    background: radial-gradient(circle, rgba($color-gold, 0.025) 0%, transparent 70%);
+    top: 10%;
+    left: -200px;
+    pointer-events: none;
+    z-index: 0;
+
+    &--right {
+      left: auto;
+      right: -200px;
+      top: auto;
+      bottom: 10%;
+    }
+  }
+
+  &__container {
+    @include container($max-width-lg);
+    position: relative;
+    z-index: $z-base;
+  }
+
+  // ── Counter badge ──
+  &__counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $sp-3;
+    margin-bottom: $sp-6;
+  }
+
+  &__counter-number {
+    font-family: $font-display;
+    font-size: $fs-h3;
+    font-weight: $fw-bold;
+    @include gold-text;
+  }
+
+  &__counter-text {
+    font-family: $font-body;
+    font-size: $fs-small;
+    color: $color-text-muted;
+    letter-spacing: $ls-wide;
+  }
+
+  // ============================================================
+  // CAROUSEL
+  // ============================================================
+  &__carousel {
+    position: relative;
+    margin-top: $sp-4;
+  }
+
+  &__viewport {
+    overflow: hidden;
+    padding: $sp-7 0;
+  }
+
+  &__track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: max-content;
+    cursor: grab;
+    user-select: none;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  // ============================================================
+  // CARD
+  // ============================================================
+  &__card {
+    flex-shrink: 0;
+    user-select: none;
+    cursor: pointer;
+    will-change: transform, opacity;
+    display: flex;
+    flex-direction: column;
+
+    &--active {
+      cursor: default;
+
+      .testi__card-body {
+        border-color: rgba($color-gold, 0.18);
+        box-shadow:
+          0 8px 60px rgba($color-gold, 0.07),
+          inset 0 1px 0 rgba($color-gold, 0.08);
+      }
+
+      .testi__card-image img {
+        transform: scale(1.03);
+      }
+    }
+  }
+
+  // ── Card image ──
+  &__card-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    @include below($bp-md) {
+      height: 160px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $dur-slow $ease-out-expo;
+    }
+
+    .testi__card:hover & img {
+      transform: scale(1.06);
+    }
+
+    &-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 20%,
+        rgba($color-dark, 0.6) 70%,
+        rgba($color-dark, 0.95) 100%
+      );
+      pointer-events: none;
+    }
+  }
+
+  // ── Card body ──
+  &__card-body {
+    padding: $sp-6;
+    @include flex-col;
+    gap: $sp-4;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+
+    // Glass morphism
+    background: linear-gradient(
+      170deg,
+      rgba(22, 22, 22, 0.85) 0%,
+      rgba(14, 14, 14, 0.92) 50%,
+      rgba(10, 10, 10, 0.96) 100%
+    );
+    border: 1px solid rgba($color-white, 0.04);
+    border-top: none;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: border-color $dur-base $ease-out-cubic,
+                box-shadow $dur-base $ease-out-cubic;
+
+    // Subtle inner glow
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba($color-gold, 0.1),
+        transparent
+      );
+      pointer-events: none;
+    }
+  }
+
+  // ── Gold quote accent ──
+  &__card-quote {
+    position: absolute;
+    top: $sp-3;
+    right: $sp-5;
+    font-family: $font-display;
+    font-size: 4rem;
+    font-weight: $fw-bold;
+    line-height: 1;
+    color: $color-gold;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  // ── Star rating ──
+  &__stars {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__star {
+    width: 16px;
+    height: 16px;
+    filter: drop-shadow(0 0 6px rgba($color-gold, 0.4));
+  }
+
+  // ── Text ──
+  &__card-text {
+    font-family: $font-display;
+    font-size: $fs-body;
+    font-weight: $fw-regular;
+    font-style: italic;
+    color: $color-text-soft;
+    line-height: $lh-relaxed;
+    margin: 0;
+    flex: 1;
+
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+
+  // ── Author ──
+  &__card-author {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    padding-top: $sp-4;
+    border-top: 1px solid rgba($color-white, 0.04);
+    margin-top: auto;
+  }
+
+  &__card-avatar {
+    width: 44px;
+    height: 44px;
+    @include flex-center;
+    font-family: $font-display;
+    font-size: $fs-small;
+    font-weight: $fw-bold;
+    color: $color-gold;
+    border: 1px solid rgba($color-gold, 0.2);
+    flex-shrink: 0;
+    position: relative;
+    background: rgba($color-gold, 0.04);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid rgba($color-gold, 0.05);
+    }
+  }
+
+  &__card-info {
+    @include flex-col;
+    min-width: 0;
+  }
+
+  &__author-name {
+    font-family: $font-display;
+    font-size: $fs-small;
+    font-weight: $fw-medium;
+    color: $color-white;
+    letter-spacing: $ls-wide;
+  }
+
+  &__card-role {
+    font-size: $fs-micro;
+    color: $color-text-muted;
+    letter-spacing: $ls-wide;
+    margin-top: 2px;
+  }
+
+  // ============================================================
+  // NAVIGATION ARROWS
+  // ============================================================
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba($color-white, 0.06);
+    background: rgba(16, 16, 16, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: $color-text-softer;
+    @include flex-center;
+    cursor: pointer;
+    transition: border-color $dur-base $ease-out-cubic,
+                color $dur-base $ease-out-cubic,
+                background $dur-base $ease-out-cubic,
+                box-shadow $dur-base $ease-out-cubic;
+    z-index: $z-above;
+    padding: 0;
+
+    &:hover {
+      border-color: rgba($color-gold, 0.3);
+      color: $color-gold;
+      background: rgba($color-gold, 0.05);
+      box-shadow: 0 0 24px rgba($color-gold, 0.08);
+    }
+
+    &--left {
+      left: $sp-5;
+
+      @include below($bp-md) {
+        left: $sp-2;
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    &--right {
+      right: $sp-5;
+
+      @include below($bp-md) {
+        right: $sp-2;
+        width: 42px;
+        height: 42px;
+      }
+    }
+  }
+
+  // ============================================================
+  // CONTROLS (counter + progress + indicators)
+  // ============================================================
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $sp-6;
+    margin-top: $sp-6;
+
+    @include below($bp-md) {
+      flex-direction: column;
+      gap: $sp-4;
+    }
+  }
+
+  // ── Active counter (01 / 15) ──
+  &__active-count {
+    display: flex;
+    align-items: baseline;
+    gap: $sp-2;
+    font-family: $font-body;
+    letter-spacing: $ls-wider;
+  }
+
+  &__active-count-current {
+    font-size: $fs-h4;
+    font-weight: $fw-bold;
+    @include gold-text;
+  }
+
+  &__active-count-sep {
+    font-size: $fs-small;
+    color: $color-text-softer;
+  }
+
+  &__active-count-total {
+    font-size: $fs-small;
+    color: $color-text-muted;
+  }
+
+  // ── Progress bar ──
+  &__progress {
+    width: 200px;
+    height: 2px;
+    background: rgba($color-white, 0.04);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+
+    @include below($bp-md) {
+      width: 160px;
+    }
+  }
+
+  &__progress-fill {
+    position: absolute;
+    inset: 0;
+    background: $gradient-gold;
+    transform-origin: left;
+  }
+
+  // ── Dot indicators ──
+  &__indicators {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__indicator {
+    width: 6px;
+    height: 6px;
+    border: 1px solid rgba($color-white, 0.08);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: all $dur-base $ease-out-cubic;
+    border-radius: $r-full;
+
+    &:hover {
+      border-color: rgba($color-gold, 0.35);
+      background: rgba($color-gold, 0.08);
+    }
+
+    &--active {
+      background: $color-gold;
+      border-color: $color-gold;
+      box-shadow: 0 0 12px rgba($color-gold, 0.35);
+      width: 18px;
+      border-radius: 3px;
+    }
+  }
+}

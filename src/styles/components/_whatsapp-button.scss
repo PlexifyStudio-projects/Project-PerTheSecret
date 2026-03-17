@@ -1,0 +1,54 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.whatsapp-fab {
+  position: fixed;
+  bottom: $sp-7;
+  right: $sp-7;
+  z-index: $z-sticky;
+  width: 60px;
+  height: 60px;
+  border-radius: $r-full;
+  background: #25d366;
+  color: $color-white;
+  @include flex-center;
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(#25d366, 0.35);
+  transition: all $dur-base $ease-out-expo;
+
+  // Pulse ring
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: $r-full;
+    border: 2px solid rgba(#25d366, 0.3);
+    animation: pulse-ring 2s $ease-out-expo infinite;
+  }
+
+  &:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 8px 32px rgba(#25d366, 0.45);
+  }
+
+  @include below($bp-md) {
+    width: 54px;
+    height: 54px;
+    bottom: $sp-5;
+    right: $sp-5;
+    font-size: 1.4rem;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

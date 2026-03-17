@@ -1,0 +1,146 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ============================================================
+// PRELOADER — Ultra Premium with Particles & Bottle Drawing
+// ============================================================
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: $z-preloader;
+  background: $color-black;
+  @include flex-center;
+  flex-direction: column;
+  overflow: hidden;
+
+  // ── Floating gold particles ──
+  &__particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__particle {
+    position: absolute;
+    bottom: 0;
+    border-radius: $r-full;
+    background: radial-gradient(circle, $color-gold 0%, rgba($color-gold, 0) 70%);
+    pointer-events: none;
+  }
+
+  // ── Center content ──
+  &__content {
+    position: relative;
+    z-index: 1;
+    @include flex-center;
+    flex-direction: column;
+    gap: $sp-5;
+  }
+
+  // ── Perfume bottle SVG ──
+  &__bottle-wrap {
+    margin-bottom: $sp-4;
+  }
+
+  &__bottle {
+    width: 60px;
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba($color-gold, 0.15));
+  }
+
+  // ── Brand name ──
+  &__brand {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $sp-1;
+  }
+
+  &__brand-main {
+    font-family: $font-display;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: $fw-bold;
+    color: $color-white;
+    letter-spacing: $ls-wide;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__brand-accent {
+    font-family: $font-display;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: $fw-bold;
+    font-style: italic;
+    @include gold-text;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  // ── Gold line ──
+  &__line {
+    width: 80px;
+    height: 1.5px;
+    background: $gradient-gold;
+    transform-origin: center;
+    margin: $sp-2 0;
+  }
+
+  // ── Tagline ──
+  &__tagline {
+    font-family: $font-body;
+    font-size: $fs-micro;
+    font-weight: $fw-medium;
+    color: $color-text-softer;
+    text-transform: uppercase;
+  }
+
+  // ── Counter ──
+  &__counter {
+    position: absolute;
+    bottom: -$sp-12;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  &__counter-num {
+    font-family: $font-display;
+    font-size: $fs-h3;
+    font-weight: $fw-light;
+    @include gold-text;
+    letter-spacing: $ls-tight;
+    min-width: 3ch;
+    text-align: right;
+  }
+
+  &__counter-pct {
+    font-family: $font-body;
+    font-size: $fs-micro;
+    color: $color-text-softer;
+    letter-spacing: $ls-wide;
+  }
+
+  // ── Bottom progress bar ──
+  &__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba($color-white, 0.03);
+    z-index: 1;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    width: 100%;
+    background: $gradient-gold;
+    transform-origin: left;
+    box-shadow: 0 0 20px rgba($color-gold, 0.3);
+  }
+}

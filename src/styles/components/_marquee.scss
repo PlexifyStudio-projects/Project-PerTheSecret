@@ -1,0 +1,86 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.marquee-band {
+  position: relative;
+  overflow: hidden;
+  background: $color-black-rich;
+  border-top: 1px solid $color-border-dark;
+  border-bottom: 1px solid $color-border-dark;
+
+  // No hover effect — keeps flowing smoothly
+
+  &__fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(60px, 8vw, 140px);
+    z-index: $z-above;
+    pointer-events: none;
+
+    &--left {
+      left: 0;
+      background: linear-gradient(90deg, $color-black-rich 0%, transparent 100%);
+    }
+
+    &--right {
+      right: 0;
+      background: linear-gradient(270deg, $color-black-rich 0%, transparent 100%);
+    }
+  }
+
+  &__row {
+    overflow: hidden;
+    padding: $sp-3 0;
+
+    & + & {
+      border-top: 1px solid rgba($color-gold, 0.04);
+    }
+
+    &--reverse .marquee-band__track {
+      animation-name: marquee-reverse;
+    }
+  }
+
+  &__track {
+    display: flex;
+    width: fit-content;
+    animation: marquee-forward 45s linear infinite;
+    will-change: transform;
+    transition: animation-duration 2s;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $sp-5;
+    padding: 0 $sp-7;
+    white-space: nowrap;
+  }
+
+  &__text {
+    font-family: $font-display;
+    font-size: $fs-h4;
+    font-weight: $fw-medium;
+    color: $color-text-softer;
+    letter-spacing: $ls-wide;
+  }
+
+  &__diamond {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: rgba($color-gold, 0.3);
+  }
+}
+
+@keyframes marquee-forward {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}

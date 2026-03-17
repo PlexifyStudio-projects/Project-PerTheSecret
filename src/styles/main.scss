@@ -1,0 +1,27 @@
+// ============================================================
+// MAIN — Perfumería The Secret · Luxury Edition
+// ============================================================
+
+@use 'abstracts' as *;
+@use 'base';
+
+// Layout
+@use 'layout/navbar';
+@use 'layout/footer';
+
+// Sections
+@use 'sections/hero';
+@use 'sections/about';
+@use 'sections/catalog';
+@use 'sections/envases';
+@use 'sections/gift-boxes';
+@use 'sections/testimonials';
+@use 'sections/contact';
+
+// Components
+@use 'components/button';
+@use 'components/whatsapp-button';
+@use 'components/section-header';
+@use 'components/preloader';
+@use 'components/cursor';
+@use 'components/marquee';

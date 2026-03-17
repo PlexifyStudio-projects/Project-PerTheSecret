@@ -1,0 +1,275 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: $color-black;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  // ── Background image (covers everything, subtle) ──
+  &__bg {
+    position: absolute;
+    inset: -5%;
+    z-index: 0;
+
+    img {
+      @include cover-image;
+      height: 100%;
+      filter: brightness(0.35) saturate(0.8) contrast(1.1);
+    }
+
+    &-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba($color-black, 0.8) 0%, rgba($color-black, 0.4) 40%, rgba($color-black, 0.2) 70%, rgba($color-black, 0.5) 100%),
+        radial-gradient(ellipse at 70% 40%, rgba($color-gold, 0.05) 0%, transparent 50%);
+    }
+  }
+
+  // ── Split container ──
+  &__container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: $max-width-lg;
+    margin-inline: auto;
+    padding: clamp($sp-9, 10vh, $sp-12) clamp($sp-5, 5vw, $sp-9);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp($sp-6, 4vw, $sp-10);
+    align-items: center;
+
+    @include below($bp-lg) {
+      grid-template-columns: 1fr;
+      padding-top: $sp-12;
+      padding-bottom: $sp-8;
+    }
+  }
+
+  // ════════════════════════════════
+  // LEFT — Text content
+  // ════════════════════════════════
+  &__text {
+    @include below($bp-lg) {
+      text-align: center;
+      order: 2;
+    }
+  }
+
+  &__label {
+    @include label;
+    display: inline-flex;
+    align-items: center;
+    gap: $sp-3;
+    color: $color-gold;
+    margin-bottom: $sp-5;
+
+    @include below($bp-lg) {
+      justify-content: center;
+    }
+
+    &-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: $r-full;
+      background: $color-gold;
+      animation: dot-pulse 2s ease-in-out infinite;
+    }
+  }
+
+  &__title {
+    margin-bottom: $sp-5;
+    overflow: hidden;
+  }
+
+  &__title-pre {
+    display: block;
+    font-family: $font-display;
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-weight: $fw-light;
+    font-style: italic;
+    color: $color-gold-light;
+    letter-spacing: $ls-wide;
+    margin-bottom: $sp-2;
+  }
+
+  &__title-main {
+    display: block;
+    font-family: $font-display;
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    font-weight: 900;
+    color: $color-white;
+    line-height: 0.95;
+    letter-spacing: $ls-hero;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &__line {
+    width: 60px;
+    height: 1px;
+    background: $gradient-gold;
+    margin: $sp-4 0;
+    transform-origin: left;
+
+    @include below($bp-lg) {
+      margin-inline: auto;
+    }
+  }
+
+  &__desc {
+    font-family: $font-body;
+    font-size: $fs-body;
+    font-weight: $fw-light;
+    color: $color-text-soft;
+    line-height: $lh-relaxed;
+    letter-spacing: $ls-wide;
+    max-width: 400px;
+    margin-bottom: $sp-5;
+
+    @include below($bp-lg) {
+      max-width: 460px;
+      margin-inline: auto;
+    }
+  }
+
+  &__ctas {
+    display: flex;
+    gap: $sp-3;
+    flex-wrap: wrap;
+
+    @include below($bp-lg) {
+      justify-content: center;
+    }
+  }
+
+  // ════════════════════════════════
+  // RIGHT — Image with animated gold frame
+  // ════════════════════════════════
+  &__visual {
+    position: relative;
+
+    @include below($bp-lg) {
+      order: 1;
+      max-width: 400px;
+      margin-inline: auto;
+    }
+  }
+
+  &__frame {
+    position: relative;
+    @include aspect(4, 4.3);
+    overflow: hidden;
+    max-height: 70vh;
+  }
+
+  &__frame-border {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+
+    rect {
+      stroke-dasharray: 1796;
+    }
+  }
+
+  &__frame-img {
+    @include cover-image;
+    position: absolute;
+    inset: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    filter: contrast(1.05) saturate(1.1);
+  }
+
+  // ── Floating badge ──
+  &__badge {
+    position: absolute;
+    bottom: $sp-6;
+    left: -$sp-6;
+    @include dark-glass;
+    padding: $sp-4 $sp-6;
+    text-align: center;
+    z-index: 3;
+
+    @include below($bp-md) {
+      left: $sp-2;
+      bottom: $sp-2;
+    }
+
+    &-num {
+      display: block;
+      font-family: $font-display;
+      font-size: $fs-h3;
+      font-weight: $fw-bold;
+      @include gold-text;
+      line-height: 1;
+    }
+
+    &-text {
+      @include label;
+      font-size: 0.5rem;
+      color: $color-text-softer;
+      margin-top: $sp-1;
+    }
+  }
+
+  // ── Scroll indicator ──
+  &__scroll {
+    position: absolute;
+    bottom: $sp-7;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    @include flex-col;
+    align-items: center;
+    gap: $sp-2;
+    color: $color-text-softer;
+
+    span {
+      @include label;
+      font-size: 0.5rem;
+    }
+
+    &-bar {
+      width: 1px;
+      height: 40px;
+      background: rgba($color-white, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    &-dot {
+      width: 1px;
+      height: 14px;
+      background: $color-gold;
+      animation: scroll-travel 2s $ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.6); }
+}
+
+@keyframes scroll-travel {
+  0% { transform: translateY(-100%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(300%); opacity: 0; }
+}
+
+// For gold-text mixin
+@keyframes shimmer-text {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+}

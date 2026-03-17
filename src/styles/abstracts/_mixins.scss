@@ -1,0 +1,209 @@
+// ============================================================
+// MIXINS — Luxury utility patterns
+// ============================================================
+
+@use 'variables' as *;
+
+// --- Responsive ---
+@mixin below($bp) {
+  @media (max-width: $bp) { @content; }
+}
+
+@mixin above($bp) {
+  @media (min-width: $bp) { @content; }
+}
+
+// --- Container ---
+@mixin container($max: $max-width) {
+  width: 100%;
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: clamp($sp-5, 5vw, $sp-9);
+}
+
+// --- Flexbox ---
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+// --- Generous section spacing (luxury brands use massive whitespace) ---
+@mixin section-spacing {
+  padding-block: clamp($sp-12, 12vw, $sp-20);
+}
+
+// --- Gold text gradient with shimmer ---
+@mixin gold-text {
+  background: $gradient-gold-text;
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 5s ease-in-out infinite;
+}
+
+// --- Gold line reveal (appears on .is-visible) ---
+@mixin gold-line($width: 48px, $height: 1px) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -$sp-3;
+    left: 50%;
+    width: $width;
+    height: $height;
+    background: $gradient-gold;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    transition: transform $dur-slower $ease-out-expo;
+  }
+
+  &.is-visible::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+// --- Display heading ---
+@mixin heading-display {
+  font-family: $font-display;
+  font-weight: $fw-bold;
+  line-height: $lh-tight;
+  letter-spacing: $ls-tight;
+}
+
+// --- Body text ---
+@mixin body-text {
+  font-family: $font-body;
+  font-weight: $fw-regular;
+  line-height: $lh-normal;
+}
+
+// --- Label (uppercase micro) ---
+@mixin label {
+  font-family: $font-body;
+  font-size: $fs-nano;
+  font-weight: $fw-medium;
+  letter-spacing: $ls-widest;
+  text-transform: uppercase;
+}
+
+// --- Luxury link underline reveal ---
+@mixin link-luxury {
+  position: relative;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform $dur-base $ease-out-expo;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+// --- Image cover ---
+@mixin cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+// --- Aspect ratio ---
+@mixin aspect($w, $h) {
+  aspect-ratio: #{$w} / #{$h};
+  overflow: hidden;
+}
+
+// --- Dark glass card ---
+@mixin dark-glass {
+  background: rgba(18, 18, 18, 0.6);
+  border: 1px solid $color-border-dark;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+// --- Noise texture overlay ---
+@mixin noise-overlay {
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: $gradient-noise;
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+// --- Scroll reveal base ---
+@mixin reveal-base {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity $dur-slower $ease-out-expo, transform $dur-slower $ease-out-expo;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin reveal-stagger($delay: 0.08s) {
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$delay * $i};
+    }
+  }
+}
+
+// --- Luxury hover (subtle, confident) ---
+@mixin hover-luxury($distance: -3px) {
+  transition: transform $dur-fast $ease-out-cubic;
+  will-change: transform;
+
+  &:hover {
+    transform: translateY($distance);
+  }
+}
+
+// --- Visually hidden ---
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// --- Scrollbar hide ---
+@mixin hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}

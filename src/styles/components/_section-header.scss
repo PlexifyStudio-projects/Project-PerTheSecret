@@ -1,0 +1,52 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.section-header {
+  text-align: center;
+  margin-bottom: clamp($sp-9, 6vw, $sp-12);
+  @include reveal-base;
+
+  &__label {
+    @include label;
+    display: inline-flex;
+    align-items: center;
+    gap: $sp-3;
+    color: $color-gold;
+    margin-bottom: $sp-5;
+
+    &::before,
+    &::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: $gradient-gold;
+      opacity: 0.5;
+    }
+  }
+
+  &__title {
+    @include heading-display;
+    font-size: $fs-h2;
+    color: $color-white;
+    @include gold-line(80px);
+    padding-bottom: $sp-5;
+  }
+
+  &__text {
+    @include body-text;
+    font-size: $fs-body-lg;
+    color: $color-text-muted;
+    max-width: $max-width-sm;
+    margin-inline: auto;
+    margin-top: $sp-6;
+  }
+
+  // Light variant for dark sections
+  &--light &__title {
+    color: $color-primary;
+  }
+
+  &--light &__text {
+    color: $color-warm-gray;
+  }
+}

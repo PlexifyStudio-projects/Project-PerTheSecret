@@ -1,0 +1,281 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.about {
+  @include section-spacing;
+  position: relative;
+  background: $color-black;
+  @include noise-overlay;
+
+  &__container {
+    @include container($max-width-lg);
+    position: relative;
+    z-index: $z-base;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp($sp-8, 6vw, $sp-12);
+    align-items: center;
+
+    @include below($bp-lg) {
+      grid-template-columns: 1fr;
+      gap: $sp-8;
+    }
+  }
+
+  // ════════════════════════════════
+  // IMAGE SIDE
+  // ════════════════════════════════
+  &__visual {
+    position: relative;
+
+    @include below($bp-lg) {
+      max-width: 500px;
+      margin-inline: auto;
+    }
+  }
+
+  &__image-box {
+    position: relative;
+    @include aspect(4, 5);
+    overflow: hidden;
+    background: $color-dark;
+  }
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    @include cover-image;
+  }
+
+  // ── Navigation arrows ──
+  &__arrows {
+    position: absolute;
+    bottom: $sp-5;
+    right: $sp-5;
+    z-index: 3;
+    display: flex;
+    gap: $sp-2;
+  }
+
+  &__arrow {
+    width: 42px;
+    height: 42px;
+    @include flex-center;
+    background: rgba($color-black, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid $color-border-dark;
+    color: $color-text-soft;
+    cursor: pointer;
+    transition: all $dur-fast $ease-out-cubic;
+
+    &:hover {
+      border-color: $color-gold;
+      color: $color-gold;
+      background: rgba($color-gold, 0.08);
+    }
+  }
+
+  // ── Slide counter ──
+  &__counter {
+    position: absolute;
+    top: $sp-5;
+    right: $sp-5;
+    z-index: 3;
+    display: flex;
+    align-items: baseline;
+    gap: $sp-1;
+    font-family: $font-display;
+
+    &-current {
+      font-size: $fs-h3;
+      font-weight: $fw-bold;
+      @include gold-text;
+    }
+
+    &-sep {
+      font-size: $fs-small;
+      color: $color-text-softer;
+      margin: 0 $sp-1;
+    }
+
+    &-total {
+      font-size: $fs-small;
+      color: $color-text-softer;
+    }
+  }
+
+  // ── Progress dots ──
+  &__dots {
+    position: absolute;
+    bottom: $sp-5;
+    left: $sp-5;
+    z-index: 3;
+    display: flex;
+    gap: $sp-3;
+  }
+
+  &__dot {
+    width: 24px;
+    height: 2px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: rgba($color-white, 0.15);
+    transition: all $dur-base $ease-out-expo;
+
+    &--active {
+      background: $color-gold;
+      width: 36px;
+    }
+  }
+
+  // ── Floating stat ──
+  &__stat {
+    position: absolute;
+    bottom: $sp-8;
+    left: -$sp-5;
+    @include dark-glass;
+    padding: $sp-5 $sp-6;
+    text-align: center;
+    z-index: 4;
+
+    @include below($bp-md) {
+      left: $sp-3;
+      bottom: -$sp-4;
+    }
+
+    &-number {
+      display: block;
+      font-family: $font-display;
+      font-size: $fs-h2;
+      font-weight: $fw-bold;
+      @include gold-text;
+      line-height: 1;
+    }
+
+    &-label {
+      @include label;
+      font-size: 0.5rem;
+      color: $color-text-softer;
+      margin-top: $sp-2;
+      display: block;
+    }
+  }
+
+  // ════════════════════════════════
+  // CONTENT SIDE
+  // ════════════════════════════════
+  &__content {
+    @include below($bp-lg) {
+      text-align: center;
+    }
+  }
+
+  &__label {
+    @include label;
+    color: $color-gold;
+    margin-bottom: $sp-6;
+    display: inline-flex;
+    align-items: center;
+    gap: $sp-3;
+
+    &-line {
+      width: 28px;
+      height: 1px;
+      background: $color-gold;
+      opacity: 0.4;
+
+      @include below($bp-lg) { width: 20px; }
+    }
+  }
+
+  &__title {
+    @include heading-display;
+    font-size: $fs-display;
+    color: $color-white;
+    margin-bottom: $sp-6;
+
+    &-accent {
+      @include gold-text;
+      font-style: italic;
+    }
+  }
+
+  &__text {
+    @include body-text;
+    font-size: $fs-body;
+    color: $color-text-muted;
+    line-height: $lh-relaxed;
+    max-width: 520px;
+    margin-bottom: $sp-6;
+
+    @include below($bp-lg) {
+      max-width: none;
+      margin-inline: auto;
+    }
+  }
+
+  &__divider {
+    width: 48px;
+    height: 1px;
+    background: $gradient-gold;
+    margin-bottom: $sp-6;
+    opacity: 0.5;
+
+    @include below($bp-lg) {
+      margin-inline: auto;
+    }
+  }
+
+  // ── Features grid ──
+  &__features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $sp-3;
+
+    @include below($bp-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__feature {
+    display: flex;
+    align-items: center;
+    gap: $sp-4;
+    padding: $sp-4;
+    border: 1px solid transparent;
+    transition: all $dur-fast $ease-out-cubic;
+
+    &:hover {
+      border-color: $color-border-gold;
+      background: $color-gold-muted;
+
+      .about__feature-icon {
+        border-color: rgba($color-gold, 0.4);
+        color: $color-gold;
+      }
+    }
+
+    @include below($bp-lg) {
+      justify-content: center;
+    }
+
+    &-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid $color-border-dark;
+      @include flex-center;
+      color: $color-text-softer;
+      flex-shrink: 0;
+      transition: all $dur-base $ease-out-cubic;
+    }
+
+    &-text {
+      font-size: $fs-small;
+      font-weight: $fw-medium;
+      color: $color-text-soft;
+      letter-spacing: $ls-wide;
+    }
+  }
+}
