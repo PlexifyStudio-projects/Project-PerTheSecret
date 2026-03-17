@@ -2,7 +2,7 @@
 @use '../abstracts/mixins' as *;
 
 // ============================================================
-// PRELOADER — Luxury with Premium Bottle & Typography
+// PRELOADER — Line-Art Bottle + Luxury Typography
 // ============================================================
 
 .preloader {
@@ -13,7 +13,7 @@
   @include flex-center;
   overflow: hidden;
 
-  // ── Mist particles ──
+  // ── Mist ──
   &__mist {
     position: absolute;
     inset: 0;
@@ -28,79 +28,106 @@
   }
 
   // ── Ambient glow ──
-  &__ambient {
+  &__glow {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(500px, 70vw);
-    height: min(500px, 70vw);
+    width: min(700px, 90vw);
+    height: min(700px, 90vw);
     border-radius: $r-full;
     background: radial-gradient(
       circle,
-      rgba($color-gold, 0.06) 0%,
-      rgba($color-gold, 0.02) 35%,
-      transparent 65%
+      rgba($color-gold, 0.05) 0%,
+      rgba($color-gold, 0.02) 30%,
+      transparent 60%
     );
     pointer-events: none;
-    filter: blur(50px);
+    filter: blur(60px);
   }
 
-  // ── Center layout ──
-  &__center {
+  // ── Layout — side by side ──
+  &__layout {
     position: relative;
     z-index: 1;
-    @include flex-center;
-    flex-direction: column;
-    gap: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp($sp-8, 6vw, $sp-16);
+
+    @include below($bp-md) {
+      flex-direction: column;
+      gap: $sp-6;
+    }
   }
 
-  // ── Bottle ──
-  &__bottle-wrap {
-    margin-bottom: $sp-6;
-    position: relative;
-    filter: drop-shadow(0 8px 40px rgba($color-gold, 0.08));
+  // ── Bottle column ──
+  &__bottle-col {
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 40px rgba($color-gold, 0.06));
   }
 
   &__bottle {
-    width: clamp(70px, 10vw, 100px);
+    width: clamp(100px, 16vw, 160px);
     height: auto;
+
+    @include below($bp-md) {
+      width: clamp(80px, 25vw, 110px);
+    }
   }
 
-  // ── Brand ──
-  &__brand {
-    text-align: center;
-    @include flex-center;
-    flex-direction: column;
-    gap: $sp-2;
+  // ── Text column ──
+  &__text-col {
+    @include flex-col;
+    gap: 0;
+
+    @include below($bp-md) {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  // ── Accent line ──
+  &__accent-line {
+    width: 50px;
+    height: 1px;
+    background: $gradient-gold;
+    margin-bottom: $sp-5;
+    transform-origin: left;
+
+    @include below($bp-md) {
+      transform-origin: center;
+    }
+  }
+
+  // ── Label ──
+  &__label {
+    font-family: $font-body;
+    font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+    font-weight: $fw-medium;
+    color: $color-gold;
+    text-transform: uppercase;
+    margin-bottom: $sp-2;
+  }
+
+  // ── Title ──
+  &__title {
+    position: relative;
+    overflow: hidden;
     margin-bottom: $sp-5;
   }
 
-  &__brand-label {
-    font-family: $font-body;
-    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-    font-weight: $fw-medium;
-    color: rgba($color-gold, 0.55);
-    text-transform: uppercase;
-  }
-
-  &__brand-title {
-    position: relative;
-    overflow: hidden;
-  }
-
-  &__brand-title-text {
+  &__title-text {
     font-family: $font-display;
-    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-size: clamp(2.8rem, 7vw, 6rem);
     font-weight: $fw-bold;
     font-style: italic;
-    line-height: 1.1;
+    line-height: 1.05;
     display: block;
 
     background: linear-gradient(
       180deg,
       $color-white 0%,
-      $color-white 35%,
+      $color-white 30%,
       rgba($color-gold-light, 0.85) 100%
     );
     -webkit-background-clip: text;
@@ -108,44 +135,43 @@
     background-clip: text;
   }
 
-  &__brand-shimmer {
+  &__shimmer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
+    width: 40%;
     height: 100%;
     background: linear-gradient(
       90deg,
       transparent 0%,
       rgba($color-gold, 0.12) 40%,
-      rgba($color-gold-light, 0.2) 50%,
+      rgba($color-gold-light, 0.22) 50%,
       rgba($color-gold, 0.12) 60%,
       transparent 100%
     );
     pointer-events: none;
   }
 
-  // ── Divider ──
-  &__divider {
+  // ── Ornament ──
+  &__ornament {
     display: flex;
     align-items: center;
     gap: $sp-3;
     margin-bottom: $sp-4;
   }
 
-  &__divider-line {
-    width: 40px;
+  &__ornament-line {
+    width: 35px;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba($color-gold, 0.3), transparent);
     transform-origin: center;
   }
 
-  &__divider-dot {
+  &__ornament-diamond {
     width: 5px;
     height: 5px;
     background: $color-gold;
     transform: rotate(45deg);
-    opacity: 0.35;
     flex-shrink: 0;
   }
 
@@ -162,18 +188,18 @@
   // ── Counter ──
   &__counter {
     position: absolute;
-    bottom: clamp(24px, 4vw, 48px);
-    right: clamp(24px, 4vw, 48px);
+    bottom: clamp(20px, 4vw, 44px);
+    right: clamp(20px, 4vw, 44px);
     z-index: 1;
   }
 
   &__counter-num {
     font-family: $font-display;
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
     font-weight: $fw-light;
     font-style: italic;
     @include gold-text;
-    opacity: 0.2;
+    opacity: 0.18;
     letter-spacing: $ls-tight;
   }
 
