@@ -2,7 +2,7 @@
 @use '../abstracts/mixins' as *;
 
 // ============================================================
-// PRELOADER — Ultra Premium with Particles & Bottle Drawing
+// PRELOADER — Ultra Premium with Particles, Bottle & Shimmer
 // ============================================================
 
 .preloader {
@@ -26,8 +26,62 @@
     position: absolute;
     bottom: 0;
     border-radius: $r-full;
-    background: radial-gradient(circle, $color-gold 0%, rgba($color-gold, 0) 70%);
+    background: radial-gradient(circle, rgba($color-gold, 0.9) 0%, rgba($color-gold, 0) 70%);
     pointer-events: none;
+  }
+
+  // ── Corner accents ──
+  &__corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    pointer-events: none;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      background: rgba($color-gold, 0.2);
+    }
+
+    &::before {
+      width: 100%;
+      height: 1px;
+    }
+
+    &::after {
+      width: 1px;
+      height: 100%;
+    }
+
+    &--tl {
+      top: clamp(20px, 4vw, 50px);
+      left: clamp(20px, 4vw, 50px);
+      &::before { top: 0; left: 0; }
+      &::after { top: 0; left: 0; }
+    }
+
+    &--tr {
+      top: clamp(20px, 4vw, 50px);
+      right: clamp(20px, 4vw, 50px);
+      &::before { top: 0; right: 0; }
+      &::after { top: 0; right: 0; }
+    }
+
+    &--bl {
+      bottom: clamp(20px, 4vw, 50px);
+      left: clamp(20px, 4vw, 50px);
+      &::before { bottom: 0; left: 0; }
+      &::after { bottom: 0; left: 0; }
+    }
+
+    &--br {
+      bottom: clamp(20px, 4vw, 50px);
+      right: clamp(20px, 4vw, 50px);
+      &::before { bottom: 0; right: 0; }
+      &::after { bottom: 0; right: 0; }
+    }
   }
 
   // ── Center content ──
@@ -36,18 +90,39 @@
     z-index: 1;
     @include flex-center;
     flex-direction: column;
-    gap: $sp-5;
+    gap: $sp-4;
   }
 
-  // ── Perfume bottle SVG ──
+  // ── Pulsing glow ──
+  &__glow {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    border-radius: $r-full;
+    background: radial-gradient(
+      circle,
+      rgba($color-gold, 0.12) 0%,
+      rgba($color-gold, 0.04) 40%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(30px);
+  }
+
+  // ── Perfume bottle ──
   &__bottle-wrap {
-    margin-bottom: $sp-4;
+    margin-bottom: $sp-5;
+    position: relative;
   }
 
   &__bottle {
-    width: 60px;
+    width: 65px;
     height: auto;
-    filter: drop-shadow(0 0 20px rgba($color-gold, 0.15));
+    filter: drop-shadow(0 0 30px rgba($color-gold, 0.12));
   }
 
   // ── Brand name ──
@@ -61,7 +136,7 @@
 
   &__brand-main {
     font-family: $font-display;
-    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
     font-weight: $fw-bold;
     color: $color-white;
     letter-spacing: $ls-wide;
@@ -72,22 +147,42 @@
 
   &__brand-accent {
     font-family: $font-display;
-    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
     font-weight: $fw-bold;
     font-style: italic;
     @include gold-text;
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
+    filter: drop-shadow(0 0 20px rgba($color-gold, 0.2));
   }
 
-  // ── Gold line ──
-  &__line {
-    width: 80px;
-    height: 1.5px;
-    background: $gradient-gold;
+  // ── Ornamental separator ──
+  &__ornament {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    margin: $sp-3 0;
+  }
+
+  &__ornament-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($color-gold, 0.4) 50%,
+      transparent 100%
+    );
     transform-origin: center;
-    margin: $sp-2 0;
+  }
+
+  &__ornament-diamond {
+    width: 6px;
+    height: 6px;
+    background: $color-gold;
+    opacity: 0.5;
+    flex-shrink: 0;
   }
 
   // ── Tagline ──
@@ -99,18 +194,20 @@
     text-transform: uppercase;
   }
 
-  // ── Counter ──
+  // ── Counter — bottom left ──
   &__counter {
     position: absolute;
-    bottom: -$sp-12;
+    bottom: clamp(24px, 4vw, 50px);
+    left: clamp(24px, 4vw, 50px);
     display: flex;
     align-items: baseline;
     gap: 2px;
+    z-index: 1;
   }
 
   &__counter-num {
     font-family: $font-display;
-    font-size: $fs-h3;
+    font-size: $fs-h2;
     font-weight: $fw-light;
     @include gold-text;
     letter-spacing: $ls-tight;
@@ -120,7 +217,7 @@
 
   &__counter-pct {
     font-family: $font-body;
-    font-size: $fs-micro;
+    font-size: $fs-small;
     color: $color-text-softer;
     letter-spacing: $ls-wide;
   }
@@ -141,6 +238,6 @@
     width: 100%;
     background: $gradient-gold;
     transform-origin: left;
-    box-shadow: 0 0 20px rgba($color-gold, 0.3);
+    box-shadow: 0 0 24px rgba($color-gold, 0.3);
   }
 }
