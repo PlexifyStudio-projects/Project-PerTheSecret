@@ -2,7 +2,7 @@
 @use '../abstracts/mixins' as *;
 
 // ============================================================
-// PRELOADER — Luxury Minimalist (Tom Ford / Chanel inspired)
+// PRELOADER — Luxury with Premium Bottle & Typography
 // ============================================================
 
 .preloader {
@@ -27,85 +27,88 @@
     background: radial-gradient(circle, rgba($color-gold, 0.8) 0%, transparent 70%);
   }
 
-  // ── Ambient radial glow ──
+  // ── Ambient glow ──
   &__ambient {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(600px, 80vw);
-    height: min(600px, 80vw);
+    width: min(500px, 70vw);
+    height: min(500px, 70vw);
     border-radius: $r-full;
     background: radial-gradient(
       circle,
       rgba($color-gold, 0.06) 0%,
-      rgba($color-gold, 0.02) 30%,
+      rgba($color-gold, 0.02) 35%,
       transparent 65%
     );
     pointer-events: none;
-    filter: blur(40px);
+    filter: blur(50px);
   }
 
-  // ── Center content ──
+  // ── Center layout ──
   &__center {
     position: relative;
     z-index: 1;
     @include flex-center;
     flex-direction: column;
     gap: 0;
-    padding: $sp-6;
   }
 
-  // ── Top accent line ──
-  &__accent-line {
-    width: 60px;
-    height: 1px;
-    background: $gradient-gold;
-    margin-bottom: $sp-7;
-    transform-origin: center;
+  // ── Bottle ──
+  &__bottle-wrap {
+    margin-bottom: $sp-6;
+    position: relative;
+    filter: drop-shadow(0 8px 40px rgba($color-gold, 0.08));
   }
 
-  // ── "Perfumería" label ──
-  &__label {
+  &__bottle {
+    width: clamp(70px, 10vw, 100px);
+    height: auto;
+  }
+
+  // ── Brand ──
+  &__brand {
+    text-align: center;
+    @include flex-center;
+    flex-direction: column;
+    gap: $sp-2;
+    margin-bottom: $sp-5;
+  }
+
+  &__brand-label {
     font-family: $font-body;
     font-size: clamp(0.7rem, 1.2vw, 0.85rem);
     font-weight: $fw-medium;
-    color: rgba($color-gold, 0.6);
+    color: rgba($color-gold, 0.55);
     text-transform: uppercase;
-    margin-bottom: $sp-3;
   }
 
-  // ── "The Secret" title ──
-  &__title {
+  &__brand-title {
     position: relative;
     overflow: hidden;
-    margin-bottom: $sp-6;
   }
 
-  &__title-text {
+  &__brand-title-text {
     font-family: $font-display;
-    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
     font-weight: $fw-bold;
     font-style: italic;
-    color: $color-white;
-    line-height: 1;
+    line-height: 1.1;
     display: block;
-    position: relative;
 
-    // Subtle gold tint
     background: linear-gradient(
       180deg,
       $color-white 0%,
-      $color-white 40%,
-      rgba($color-gold-light, 0.8) 100%
+      $color-white 35%,
+      rgba($color-gold-light, 0.85) 100%
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  // ── Golden shimmer sweep ──
-  &__shimmer {
+  &__brand-shimmer {
     position: absolute;
     top: 0;
     left: 0;
@@ -114,31 +117,26 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba($color-gold, 0.15) 40%,
-      rgba($color-gold-light, 0.25) 50%,
-      rgba($color-gold, 0.15) 60%,
+      rgba($color-gold, 0.12) 40%,
+      rgba($color-gold-light, 0.2) 50%,
+      rgba($color-gold, 0.12) 60%,
       transparent 100%
     );
     pointer-events: none;
   }
 
-  // ── Ornamental divider ──
+  // ── Divider ──
   &__divider {
     display: flex;
     align-items: center;
     gap: $sp-3;
-    margin-bottom: $sp-5;
+    margin-bottom: $sp-4;
   }
 
   &__divider-line {
     width: 40px;
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba($color-gold, 0.3),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba($color-gold, 0.3), transparent);
     transform-origin: center;
   }
 
@@ -147,7 +145,7 @@
     height: 5px;
     background: $color-gold;
     transform: rotate(45deg);
-    opacity: 0.4;
+    opacity: 0.35;
     flex-shrink: 0;
   }
 
@@ -161,7 +159,7 @@
     letter-spacing: $ls-widest;
   }
 
-  // ── Counter — bottom right ──
+  // ── Counter ──
   &__counter {
     position: absolute;
     bottom: clamp(24px, 4vw, 48px);
@@ -175,11 +173,11 @@
     font-weight: $fw-light;
     font-style: italic;
     @include gold-text;
-    opacity: 0.25;
+    opacity: 0.2;
     letter-spacing: $ls-tight;
   }
 
-  // ── Bottom progress bar ──
+  // ── Progress ──
   &__progress {
     position: absolute;
     bottom: 0;
