@@ -2,7 +2,7 @@
 @use '../abstracts/mixins' as *;
 
 // ============================================================
-// PRELOADER — Ultra Premium with Particles, Bottle & Shimmer
+// PRELOADER — Luxury Minimalist (Tom Ford / Chanel inspired)
 // ============================================================
 
 .preloader {
@@ -11,177 +11,143 @@
   z-index: $z-preloader;
   background: $color-black;
   @include flex-center;
-  flex-direction: column;
   overflow: hidden;
 
-  // ── Floating gold particles ──
-  &__particles {
+  // ── Mist particles ──
+  &__mist {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
   }
 
-  &__particle {
+  &__mist-dot {
     position: absolute;
     bottom: 0;
     border-radius: $r-full;
-    background: radial-gradient(circle, rgba($color-gold, 0.9) 0%, rgba($color-gold, 0) 70%);
-    pointer-events: none;
+    background: radial-gradient(circle, rgba($color-gold, 0.8) 0%, transparent 70%);
   }
 
-  // ── Corner accents ──
-  &__corner {
+  // ── Ambient radial glow ──
+  &__ambient {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(600px, 80vw);
+    height: min(600px, 80vw);
+    border-radius: $r-full;
+    background: radial-gradient(
+      circle,
+      rgba($color-gold, 0.06) 0%,
+      rgba($color-gold, 0.02) 30%,
+      transparent 65%
+    );
     pointer-events: none;
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      background: rgba($color-gold, 0.2);
-    }
-
-    &::before {
-      width: 100%;
-      height: 1px;
-    }
-
-    &::after {
-      width: 1px;
-      height: 100%;
-    }
-
-    &--tl {
-      top: clamp(20px, 4vw, 50px);
-      left: clamp(20px, 4vw, 50px);
-      &::before { top: 0; left: 0; }
-      &::after { top: 0; left: 0; }
-    }
-
-    &--tr {
-      top: clamp(20px, 4vw, 50px);
-      right: clamp(20px, 4vw, 50px);
-      &::before { top: 0; right: 0; }
-      &::after { top: 0; right: 0; }
-    }
-
-    &--bl {
-      bottom: clamp(20px, 4vw, 50px);
-      left: clamp(20px, 4vw, 50px);
-      &::before { bottom: 0; left: 0; }
-      &::after { bottom: 0; left: 0; }
-    }
-
-    &--br {
-      bottom: clamp(20px, 4vw, 50px);
-      right: clamp(20px, 4vw, 50px);
-      &::before { bottom: 0; right: 0; }
-      &::after { bottom: 0; right: 0; }
-    }
+    filter: blur(40px);
   }
 
   // ── Center content ──
-  &__content {
+  &__center {
     position: relative;
     z-index: 1;
     @include flex-center;
     flex-direction: column;
-    gap: $sp-4;
+    gap: 0;
+    padding: $sp-6;
   }
 
-  // ── Pulsing glow ──
-  &__glow {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 200px;
-    border-radius: $r-full;
-    background: radial-gradient(
-      circle,
-      rgba($color-gold, 0.12) 0%,
-      rgba($color-gold, 0.04) 40%,
-      transparent 70%
-    );
-    pointer-events: none;
-    z-index: -1;
-    filter: blur(30px);
+  // ── Top accent line ──
+  &__accent-line {
+    width: 60px;
+    height: 1px;
+    background: $gradient-gold;
+    margin-bottom: $sp-7;
+    transform-origin: center;
   }
 
-  // ── Perfume bottle ──
-  &__bottle-wrap {
-    margin-bottom: $sp-5;
+  // ── "Perfumería" label ──
+  &__label {
+    font-family: $font-body;
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+    font-weight: $fw-medium;
+    color: rgba($color-gold, 0.6);
+    text-transform: uppercase;
+    margin-bottom: $sp-3;
+  }
+
+  // ── "The Secret" title ──
+  &__title {
     position: relative;
+    overflow: hidden;
+    margin-bottom: $sp-6;
   }
 
-  &__bottle {
-    width: 65px;
-    height: auto;
-    filter: drop-shadow(0 0 30px rgba($color-gold, 0.12));
-  }
-
-  // ── Brand name ──
-  &__brand {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $sp-1;
-  }
-
-  &__brand-main {
+  &__title-text {
     font-family: $font-display;
-    font-size: clamp(1.8rem, 4.5vw, 3rem);
-    font-weight: $fw-bold;
-    color: $color-white;
-    letter-spacing: $ls-wide;
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  &__brand-accent {
-    font-family: $font-display;
-    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-size: clamp(3rem, 8vw, 6.5rem);
     font-weight: $fw-bold;
     font-style: italic;
-    @include gold-text;
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    filter: drop-shadow(0 0 20px rgba($color-gold, 0.2));
+    color: $color-white;
+    line-height: 1;
+    display: block;
+    position: relative;
+
+    // Subtle gold tint
+    background: linear-gradient(
+      180deg,
+      $color-white 0%,
+      $color-white 40%,
+      rgba($color-gold-light, 0.8) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  // ── Ornamental separator ──
-  &__ornament {
-    display: flex;
-    align-items: center;
-    gap: $sp-3;
-    margin: $sp-3 0;
-  }
-
-  &__ornament-line {
-    width: 50px;
-    height: 1px;
+  // ── Golden shimmer sweep ──
+  &__shimmer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba($color-gold, 0.4) 50%,
+      rgba($color-gold, 0.15) 40%,
+      rgba($color-gold-light, 0.25) 50%,
+      rgba($color-gold, 0.15) 60%,
       transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  // ── Ornamental divider ──
+  &__divider {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    margin-bottom: $sp-5;
+  }
+
+  &__divider-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($color-gold, 0.3),
+      transparent
     );
     transform-origin: center;
   }
 
-  &__ornament-diamond {
-    width: 6px;
-    height: 6px;
+  &__divider-dot {
+    width: 5px;
+    height: 5px;
     background: $color-gold;
-    opacity: 0.5;
+    transform: rotate(45deg);
+    opacity: 0.4;
     flex-shrink: 0;
   }
 
@@ -189,37 +155,28 @@
   &__tagline {
     font-family: $font-body;
     font-size: $fs-micro;
-    font-weight: $fw-medium;
+    font-weight: $fw-regular;
     color: $color-text-softer;
     text-transform: uppercase;
+    letter-spacing: $ls-widest;
   }
 
-  // ── Counter — bottom left ──
+  // ── Counter — bottom right ──
   &__counter {
     position: absolute;
-    bottom: clamp(24px, 4vw, 50px);
-    left: clamp(24px, 4vw, 50px);
-    display: flex;
-    align-items: baseline;
-    gap: 2px;
+    bottom: clamp(24px, 4vw, 48px);
+    right: clamp(24px, 4vw, 48px);
     z-index: 1;
   }
 
   &__counter-num {
     font-family: $font-display;
-    font-size: $fs-h2;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: $fw-light;
+    font-style: italic;
     @include gold-text;
+    opacity: 0.25;
     letter-spacing: $ls-tight;
-    min-width: 3ch;
-    text-align: right;
-  }
-
-  &__counter-pct {
-    font-family: $font-body;
-    font-size: $fs-small;
-    color: $color-text-softer;
-    letter-spacing: $ls-wide;
   }
 
   // ── Bottom progress bar ──
@@ -228,7 +185,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 1px;
     background: rgba($color-white, 0.03);
     z-index: 1;
   }
@@ -238,6 +195,6 @@
     width: 100%;
     background: $gradient-gold;
     transform-origin: left;
-    box-shadow: 0 0 24px rgba($color-gold, 0.3);
+    box-shadow: 0 0 16px rgba($color-gold, 0.25);
   }
 }
